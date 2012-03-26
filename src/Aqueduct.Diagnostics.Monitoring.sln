@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Diagnostics.Monitoring", "Aqueduct.Diagnostics.Monitoring\Aqueduct.Diagnostics.Monitoring.csproj", "{247488B0-2551-415F-B68E-205FA66FD061}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Diagnostics.Monitoring.Tests", "Aqueduct.Diagnostics.Monitoring.Tests\Aqueduct.Diagnostics.Monitoring.Tests.csproj", "{B1B8C95B-5793-402C-9940-C1D220F7C56E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{247488B0-2551-415F-B68E-205FA66FD061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{247488B0-2551-415F-B68E-205FA66FD061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{247488B0-2551-415F-B68E-205FA66FD061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{247488B0-2551-415F-B68E-205FA66FD061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B8C95B-5793-402C-9940-C1D220F7C56E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B8C95B-5793-402C-9940-C1D220F7C56E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B8C95B-5793-402C-9940-C1D220F7C56E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B8C95B-5793-402C-9940-C1D220F7C56E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
