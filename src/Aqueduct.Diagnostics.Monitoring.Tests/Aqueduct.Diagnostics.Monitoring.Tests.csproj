@@ -50,9 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReadingTests.cs" />
+    <Compile Include="CountReadingTests.cs" />
     <Compile Include="MonitorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadingTestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

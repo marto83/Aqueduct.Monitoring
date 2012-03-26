@@ -18,7 +18,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Add_AddsReadingToMonitor()
         {
-            var reading = new Reading();
+            var reading = GetReading();
             Monitor.Add(reading);
 
             Assert.AreEqual(1, Monitor.Readings.Count);
@@ -27,7 +27,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Reset_ClearsAllMonitorReadings()
         {
-            var reading = new Reading();
+            var reading = GetReading();
             Monitor.Add(reading);
 
             Monitor.Reset();
@@ -38,8 +38,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Process_ClearsReadingsFromReadingsQueue()
         {
-            Monitor.Add(new Reading());
-            Monitor.Add(new Reading());
+            Monitor.Add(GetReading());
+            Monitor.Add(GetReading());
 
             Monitor.Process();
 
@@ -145,6 +145,10 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         private MonitorSubscriber GetSubscriber(Action<IList<DataPoint>> action)
         {
             return new MonitorSubscriber(String.Empty, action);
+        }
+        private static Reading GetReading()
+        {
+            return new Reading() { Name = "test", Data = new NumberReadingData(1) };
         }
     }
 }

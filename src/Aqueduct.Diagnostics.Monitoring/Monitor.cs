@@ -58,13 +58,15 @@ namespace Aqueduct.Diagnostics.Monitoring
             while (Readings.TryDequeue(out reading))
             {
                 var dataPoint = dataPoints.FirstOrDefault(dp => dp.Name == reading.Name);
-                if(dataPoint == null)
+                if (dataPoint == null)
                 {
-                    dataPoint = new DataPoint() { Name = reading.Name };
+                    dataPoint = new DataPoint() { Name = reading.Name, Data = reading.Data };
                     dataPoints.Add(dataPoint);
                 }
-
-                dataPoint.Data += reading.Value;
+                else
+                {
+                    dataPoint.Data.Aggregate(reading.Data);
+                }
             }
 
             NotifySubscribers(dataPoints);
