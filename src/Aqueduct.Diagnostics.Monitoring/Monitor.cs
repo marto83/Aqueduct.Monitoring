@@ -20,12 +20,13 @@ namespace Aqueduct.Diagnostics.Monitoring
             Subscribers = new List<MonitorSubscriber>();
         }
 
-        public static void Initialise(int processInterval)
+        public static void Initialise(int processInterval, bool enableTimer = true)
         {
             Timer = new Timer();
             Timer.Interval = processInterval;
             Timer.Elapsed += Timer_Elapsed;
-            Timer.Start();
+            if(enableTimer)
+                Timer.Start();
             _initialised = true;
         }
 
@@ -56,7 +57,14 @@ namespace Aqueduct.Diagnostics.Monitoring
             Reading reading;
             while (Readings.TryDequeue(out reading))
             {
+                var dataPoint = dataPoints.FirstOrDefault(dp => dp.Name == reading.Name);
+                if(dataPoint == null)
+                {
+                    dataPoint = new DataPoint() { Name = reading.Name };
+                    dataPoints.Add(dataPoint);
+                }
 
+                dataPoint.Data += reading.Value;
             }
 
             NotifySubscribers(dataPoints);
@@ -65,6 +73,7 @@ namespace Aqueduct.Diagnostics.Monitoring
         private static void NotifySubscribers(IList<DataPoint> dataPoints)
         {
             if (_initialised == false) return;
+
             foreach (var subscriber in Subscribers)
             {
                 try

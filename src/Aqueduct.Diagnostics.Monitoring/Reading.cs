@@ -6,10 +6,8 @@ namespace Aqueduct.Diagnostics.Monitoring
 {
     public class Reading
     {
-        public Reading()
-        {
-
-        }
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 }
 
