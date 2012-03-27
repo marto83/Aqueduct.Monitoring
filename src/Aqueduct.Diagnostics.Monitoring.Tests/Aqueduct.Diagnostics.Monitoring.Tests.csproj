@@ -50,10 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CountReadingTests.cs" />
+    <Compile Include="AmountSensorTests.cs" />
+    <Compile Include="MonitorCountReadingTests.cs" />
+    <Compile Include="MonitorDoubleReadingTests.cs" />
     <Compile Include="MonitorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadingTestsBase.cs" />
+    <Compile Include="SensorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

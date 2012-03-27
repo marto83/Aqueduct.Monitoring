@@ -45,14 +45,11 @@ namespace Aqueduct.Diagnostics.Monitoring
         }
     }
 
-
     public abstract class ReadingData
     {
         public abstract object GetValue();
         internal abstract void Aggregate(ReadingData other);        
     }
-
-
 
     public class Reading
     {

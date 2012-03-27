@@ -13,8 +13,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Setup()
         {
             _dataPoints = new List<DataPoint>();
-            Monitor.Initialise(100, false);
-            Monitor.Subscribe(GetSubscriber((dp)
+            NotificationProcessor.Initialise(100, false);
+            NotificationProcessor.Subscribe(GetSubscriber((dp)
                 =>
                 _dataPoints.AddRange(dp)
                 ));
@@ -23,7 +23,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [TearDown]
         public void Teardown()
         {
-            Monitor.Reset();
+            NotificationProcessor.Reset();
         }
 
         private MonitorSubscriber GetSubscriber(Action<IList<DataPoint>> action)
@@ -34,11 +34,6 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         protected Reading GetNumberReading(string name, int value)
         {
             return new Reading() { Name = name, Data = new NumberReadingData(value) };
-        }
-
-        protected Reading GetReading(string name, double value)
-        {
-            return new Reading() { Name = name, Data = new DoubleReadingData(value) };
         }
     }
 }

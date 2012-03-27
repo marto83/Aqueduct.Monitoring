@@ -12,57 +12,57 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [TearDown]
         public void TearDown()
         {
-            Monitor.Reset();
+            NotificationProcessor.Reset();
         }
 
         [Test]
         public void Add_AddsReadingToMonitor()
         {
             var reading = GetReading();
-            Monitor.Add(reading);
+            NotificationProcessor.Add(reading);
 
-            Assert.AreEqual(1, Monitor.Readings.Count);
+            Assert.AreEqual(1, NotificationProcessor.Readings.Count);
         }
 
         [Test]
         public void Reset_ClearsAllMonitorReadings()
         {
             var reading = GetReading();
-            Monitor.Add(reading);
+            NotificationProcessor.Add(reading);
 
-            Monitor.Reset();
+            NotificationProcessor.Reset();
 
-            Assert.That(Monitor.Readings.Count, Is.EqualTo(0));
+            Assert.That(NotificationProcessor.Readings.Count, Is.EqualTo(0));
         }
 
         [Test]
         public void Process_ClearsReadingsFromReadingsQueue()
         {
-            Monitor.Add(GetReading());
-            Monitor.Add(GetReading());
+            NotificationProcessor.Add(GetReading());
+            NotificationProcessor.Add(GetReading());
 
-            Monitor.Process();
+            NotificationProcessor.Process();
 
-            Assert.That(Monitor.Readings.Count, Is.EqualTo(0));
+            Assert.That(NotificationProcessor.Readings.Count, Is.EqualTo(0));
         }
 
         [Test]
         public void Subscribe_RegistersSubscribesToTheMonitor()
         {
-            Monitor.Subscribe(GetSubscriber((dataPoints) => Console.Write("Subscribed")));
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => Console.Write("Subscribed")));
 
-            Assert.That(Monitor.Subscribers.Count, Is.EqualTo(1));
+            Assert.That(NotificationProcessor.Subscribers.Count, Is.EqualTo(1));
         }
 
         [Test]
         public void Reset_ClearsAllSubscribers()
         {
-            Monitor.Subscribe(GetSubscriber((dataPoints) => Console.Write("Subscriber")));
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => Console.Write("Subscriber")));
 
-            Assert.That(Monitor.Subscribers, Is.Not.Empty);
+            Assert.That(NotificationProcessor.Subscribers, Is.Not.Empty);
 
-            Monitor.Reset();
-            Assert.That(Monitor.Subscribers, Is.Empty);
+            NotificationProcessor.Reset();
+            Assert.That(NotificationProcessor.Subscribers, Is.Empty);
         }
 
         [Test]
@@ -70,10 +70,10 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         {
             bool sub1called = false;
             bool sub2called = false;
-            Monitor.Subscribe(GetSubscriber((dataPoints) => sub1called = true));
-            Monitor.Subscribe(GetSubscriber((dataPoints) => sub2called = true));
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => sub1called = true));
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => sub2called = true));
 
-            Monitor.Process();
+            NotificationProcessor.Process();
 
             Assert.That(sub1called, Is.True);
             Assert.That(sub2called, Is.True);
@@ -83,13 +83,13 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Process_WhenASubscriberFailsStillNotifiesTheRestOfTheSubscribers()
         {
             bool sub2called = false;
-            Monitor.Subscribe(GetSubscriber((dataPoints) =>
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
             {
                 throw new Exception("Subscriber failed");
             }));
-            Monitor.Subscribe(GetSubscriber((dataPoints) => sub2called = true));
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => sub2called = true));
 
-            Monitor.Process();
+            NotificationProcessor.Process();
 
             Assert.That(sub2called, Is.True);
         }
@@ -98,12 +98,12 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Process_WithNoReadings_PassesAnEmptyListOfDataPointsToAllSubscribers()
         {
             IList<DataPoint> passedDataPoints = null;
-            Monitor.Subscribe(GetSubscriber((dataPoints) =>
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
             {
                 passedDataPoints = dataPoints;
             }));
 
-            Monitor.Process();
+            NotificationProcessor.Process();
 
             Assert.That(passedDataPoints, Is.Empty);
         }
@@ -112,12 +112,12 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Initialise_100MsForProcessTime_StartsATimeThatCallsAfter100ms()
         {
             bool processed = false;
-            Monitor.Subscribe(GetSubscriber((dataPoints) =>
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
             {
                 processed = true;
             }));
 
-            Monitor.Initialise(100);
+            NotificationProcessor.Initialise(100);
 
             Thread.Sleep(150);
 
@@ -128,15 +128,15 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Shutdown_StopsEnsuresProcessIsNotCalledAgain()
         {
             bool processed = false;
-            Console.Write("Monitor Subscribers: " + Monitor.Subscribers.Count);
+            Console.Write("Monitor Subscribers: " + NotificationProcessor.Subscribers.Count);
             Console.Write("processed: " + processed);
-            Monitor.Subscribe(GetSubscriber((dataPoints) =>
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
             {
                 processed = true;
             }));
 
-            Monitor.Initialise(100);
-            Monitor.Shutdown();
+            NotificationProcessor.Initialise(100);
+            NotificationProcessor.Shutdown();
             Thread.Sleep(150);
 
             Assert.That(processed, Is.False);

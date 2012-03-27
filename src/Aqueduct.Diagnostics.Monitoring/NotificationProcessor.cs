@@ -6,15 +6,15 @@ using System.Timers;
 
 namespace Aqueduct.Diagnostics.Monitoring
 {
-    public class Monitor
+    public static class NotificationProcessor
     {
         private static Timer Timer;
-        private static ILogger Logger = AppLogger.GetNamedLogger(typeof(Monitor));
+        private static ILogger Logger = AppLogger.GetNamedLogger(typeof(NotificationProcessor));
         internal static IList<MonitorSubscriber> Subscribers { get; private set; }
         internal static ConcurrentQueue<Reading> Readings { get; private set; }
         private static volatile bool _initialised = false;
 
-        static Monitor()
+        static NotificationProcessor()
         {
             Readings = new ConcurrentQueue<Reading>();
             Subscribers = new List<MonitorSubscriber>();
@@ -51,16 +51,16 @@ namespace Aqueduct.Diagnostics.Monitoring
             Readings.Enqueue(reconding);
         }
 
-        public static void Process()
+        internal static void Process()
         {
             var dataPoints = new List<DataPoint>();
             Reading reading;
             while (Readings.TryDequeue(out reading))
             {
-                var dataPoint = dataPoints.FirstOrDefault(dp => dp.Name == reading.Name);
+                var dataPoint = dataPoints.FirstOrDefault(data => data.Name == reading.Name);
                 if (dataPoint == null)
                 {
-                    dataPoint = new DataPoint() { Name = reading.Name, Data = reading.Data };
+                    dataPoint = new DataPoint() { Name = reading.Name /*HomeController.Index*/, Data = reading.Data /*1*/ };
                     dataPoints.Add(dataPoint);
                 }
                 else
@@ -89,7 +89,7 @@ namespace Aqueduct.Diagnostics.Monitoring
             }
         }
 
-        public static void Reset()
+        internal static void Reset()
         {
             Readings = new ConcurrentQueue<Reading>();
             Subscribers.Clear();
