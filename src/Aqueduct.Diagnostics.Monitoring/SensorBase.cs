@@ -28,7 +28,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 
         protected void AddReading(ReadingData data)
         {
-//            if(string.IsNullOrEmpty(data.Name))
+            if(string.IsNullOrEmpty(data.Name))
                 data.Name = ReadingName;
 
             var newReading = new Reading() { DataPointName = GetDataPointName(), Data = data };

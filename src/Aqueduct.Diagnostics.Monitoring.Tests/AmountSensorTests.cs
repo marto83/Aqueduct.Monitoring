@@ -51,6 +51,18 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
 
             Assert.That(NotificationProcessor.Readings.First().Data.Name, Is.EqualTo("test"));
         }
+
+        [Test]
+        public void AddReading_WhenReadingDateNameIsSet_UsesTheReadingDataNameInsteadOfSensorReadingName()
+        {
+            string readingDataName = "ReadingDataName";
+            string sensorReadingName = "SenorReadingName";
+            var sensor = new SensorTestImpl(sensorReadingName);
+
+            sensor.Add(new NumberReadingData(1) { Name = readingDataName });
+
+            Assert.That(NotificationProcessor.Readings.First().Data.Name, Is.EqualTo(readingDataName));
+        }
     }
 }
 

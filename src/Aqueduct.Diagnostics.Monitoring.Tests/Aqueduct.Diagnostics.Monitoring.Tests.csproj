@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmountSensorTests.cs" />
+    <Compile Include="ErrorSensorTests.cs" />
     <Compile Include="MonitorCountReadingTests.cs" />
     <Compile Include="MonitorDoubleReadingTests.cs" />
     <Compile Include="MonitorTestBase.cs" />

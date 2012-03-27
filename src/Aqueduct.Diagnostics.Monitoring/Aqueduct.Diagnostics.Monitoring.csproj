@@ -50,6 +50,7 @@
     <Compile Include="AvgReadingData.cs" />
     <Compile Include="CountSensor.cs" />
     <Compile Include="DataPoint.cs" />
+    <Compile Include="ExceptionSensor.cs" />
     <Compile Include="MaxReadingData.cs" />
     <Compile Include="MinReadingData.cs" />
     <Compile Include="NotificationProcessor.cs" />
