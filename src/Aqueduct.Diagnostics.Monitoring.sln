@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Diagnostics.Monito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Diagnostics.Monitoring.Tests", "Aqueduct.Diagnostics.Monitoring.Tests\Aqueduct.Diagnostics.Monitoring.Tests.csproj", "{B1B8C95B-5793-402C-9940-C1D220F7C56E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Diagnostics.Monitoring.SampleMVCSite", "Aqueduct.Diagnostics.Monitoring.SampleMVCSite\Aqueduct.Diagnostics.Monitoring.SampleMVCSite.csproj", "{BD3A25ED-E7C9-45DD-A802-D520F585C078}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Diagnostics.Monitoring.MVC", "Aqueduct.Diagnostics.Monitoring.MVC\Aqueduct.Diagnostics.Monitoring.MVC.csproj", "{4307C470-DAB5-45E9-9DE1-536F213783C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{B1B8C95B-5793-402C-9940-C1D220F7C56E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1B8C95B-5793-402C-9940-C1D220F7C56E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B8C95B-5793-402C-9940-C1D220F7C56E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD3A25ED-E7C9-45DD-A802-D520F585C078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD3A25ED-E7C9-45DD-A802-D520F585C078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD3A25ED-E7C9-45DD-A802-D520F585C078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD3A25ED-E7C9-45DD-A802-D520F585C078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4307C470-DAB5-45E9-9DE1-536F213783C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4307C470-DAB5-45E9-9DE1-536F213783C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4307C470-DAB5-45E9-9DE1-536F213783C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4307C470-DAB5-45E9-9DE1-536F213783C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

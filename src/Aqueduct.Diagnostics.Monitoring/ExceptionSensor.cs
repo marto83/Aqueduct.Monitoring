@@ -17,7 +17,6 @@ namespace Aqueduct.Diagnostics.Monitoring
         {
 
         }
-
     }
 }
 
