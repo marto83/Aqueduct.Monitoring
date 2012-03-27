@@ -6,12 +6,12 @@ using NUnit.Framework;
 namespace Aqueduct.Diagnostics.Monitoring.Tests
 {
     [TestFixture]
-    public class AmountSensorTests
+    public class AmountSensorTests : MonitorTestBase
     {
         [Test]
         public void Add_AddsDoubleReadingToNotificationProcessor()
         {
-            var sensor = new AmountSensor();
+            var sensor = new AmountSensor("test");
             double sensorValue = 10.5;
             sensor.Add(sensorValue);
 
@@ -20,6 +20,36 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             Reading reading = null;
             NotificationProcessor.Readings.TryDequeue(out reading);
             Assert.That(reading.Data.GetValue(), Is.EqualTo(sensorValue));
+        }
+
+
+    }
+
+    [TestFixture]
+    public class SensorBaseTests : MonitorTestBase
+    {
+        class SensorTestImpl : SensorBase
+        {
+            public SensorTestImpl(string readingName)
+                : base(readingName)
+            {
+                
+            }
+            
+            public void Add(ReadingData data)
+            {
+                AddReading(data);
+            }
+        }
+
+        [Test]
+        public void AddReading_WhenReadingDataNameNotSet_UsesTheSensorReadingName()
+        {
+            var sensor = new SensorTestImpl("test");
+
+            sensor.Add(new NumberReadingData(1));
+
+            Assert.That(NotificationProcessor.Readings.First().Data.Name, Is.EqualTo("test"));
         }
     }
 }

@@ -6,8 +6,15 @@ using System.Threading;
 
 namespace Aqueduct.Diagnostics.Monitoring
 {
-    public class SensorBase
+    public abstract class SensorBase
     {
+        protected string ReadingName { get; private set; }
+
+        public SensorBase(string readingName)
+        {
+            ReadingName = readingName;
+        }
+
         private const string DataPointNameSlot = "FeatureName";
         protected static string GetDataPointName()
         {
@@ -19,9 +26,12 @@ namespace Aqueduct.Diagnostics.Monitoring
             Thread.SetData(Thread.GetNamedDataSlot(DataPointNameSlot), dataPointName);
         }
 
-        protected static void AddReading(ReadingData data)
+        protected void AddReading(ReadingData data)
         {
-            var newReading = new Reading() { Name = GetDataPointName(), Data = data };
+//            if(string.IsNullOrEmpty(data.Name))
+                data.Name = ReadingName;
+
+            var newReading = new Reading() { DataPointName = GetDataPointName(), Data = data };
             NotificationProcessor.Add(newReading);
         }
     }

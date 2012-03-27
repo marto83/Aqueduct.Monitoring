@@ -7,14 +7,8 @@ using System.Threading;
 namespace Aqueduct.Diagnostics.Monitoring.Tests
 {
     [TestFixture]
-    public class MonitorTests
+    public class MonitorTests : MonitorTestBase
     {
-        [TearDown]
-        public void TearDown()
-        {
-            NotificationProcessor.Reset();
-        }
-
         [Test]
         public void Add_AddsReadingToMonitor()
         {
@@ -142,13 +136,50 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             Assert.That(processed, Is.False);
         }
 
+        [Test]
+        public void Process_WithTwoReadingsWithSameNameButDifferentReadingDataNames_SendsOneDataPointToSubscribersWithTwoReadingDataValues()
+        {
+            IList<DataPoint> passedDataPoints = null;
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
+            {
+                passedDataPoints = dataPoints;
+            }));
+            NotificationProcessor.Add(new Reading { DataPointName = "DataPointName", Data = new NumberReadingData(1) { Name = "Number" } });
+            NotificationProcessor.Add(new Reading { DataPointName = "DataPointName", Data = new NumberReadingData(1) { Name = "Error" } });
+
+            NotificationProcessor.Initialise(100, false);
+            NotificationProcessor.Process();
+
+            DataPoint dataPoint = passedDataPoints.First();
+
+            Assert.That(dataPoint.Data.Count, Is.EqualTo(2));
+            Assert.That(dataPoint.Data.First().Name, Is.EqualTo("Number"));
+            Assert.That(dataPoint.Data.Last().Name, Is.EqualTo("Error"));
+        }
+
+        [Test]
+        public void Process_WithAReading_SendsOneDataPointWithCurrentDate()
+        {
+            IList<DataPoint> passedDataPoints = null;
+            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
+            {
+                passedDataPoints = dataPoints;
+            }));
+            NotificationProcessor.Add(new Reading { DataPointName = "DataPointName", Data = new NumberReadingData(1) { Name = "Number" } });
+
+            NotificationProcessor.Initialise(100, false);
+            NotificationProcessor.Process();
+
+            Assert.That(passedDataPoints.First().Date - DateTime.Now, Is.LessThan(TimeSpan.FromSeconds(1)) );
+        }
+
         private MonitorSubscriber GetSubscriber(Action<IList<DataPoint>> action)
         {
             return new MonitorSubscriber(String.Empty, action);
         }
         private static Reading GetReading()
         {
-            return new Reading() { Name = "test", Data = new NumberReadingData(1) };
+            return new Reading() { DataPointName = "test", Data = new NumberReadingData(1) };
         }
     }
 }

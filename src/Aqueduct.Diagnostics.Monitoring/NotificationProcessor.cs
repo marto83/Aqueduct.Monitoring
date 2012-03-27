@@ -57,21 +57,30 @@ namespace Aqueduct.Diagnostics.Monitoring
             Reading reading;
             while (Readings.TryDequeue(out reading))
             {
-                var dataPoint = dataPoints.FirstOrDefault(data => data.Name == reading.Name);
-                if (dataPoint == null)
-                {
-                    dataPoint = new DataPoint() { Name = reading.Name /*HomeController.Index*/, Data = reading.Data /*1*/ };
-                    dataPoints.Add(dataPoint);
-                }
-                else
-                {
-                    dataPoint.Data.Aggregate(reading.Data);
-                }
+                ProcessReading(dataPoints, reading);
             }
 
             NotifySubscribers(dataPoints);
         }
 
+        private static void ProcessReading(List<DataPoint> dataPoints, Reading reading)
+        {
+            var dataPoint = dataPoints.FirstOrDefault(data => data.Name == reading.DataPointName);
+            if (dataPoint == null)
+            {
+                dataPoint = new DataPoint() { Name = reading.DataPointName };
+                dataPoint.Data.Add(reading.Data);
+                dataPoints.Add(dataPoint);
+            }
+            else
+            {
+                var readingData = dataPoint.Data.FirstOrDefault(rd => rd.Name == reading.Data.Name);
+                if (readingData == null)
+                    dataPoint.Data.Add(reading.Data);
+                else
+                    readingData.Aggregate(reading.Data);
+            }
+        }
         private static void NotifySubscribers(IList<DataPoint> dataPoints)
         {
             if (_initialised == false) return;

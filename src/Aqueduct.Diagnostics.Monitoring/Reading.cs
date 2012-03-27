@@ -4,24 +4,6 @@ using System.Linq;
 
 namespace Aqueduct.Diagnostics.Monitoring
 {
-    public class NumberReadingData : ReadingData
-    {
-        public int Value { get; set; }
-
-        public NumberReadingData(int value)
-        {
-            Value = value;
-        }
-        public override object GetValue()
-        {
-            return Value;
-        }
-        internal override void Aggregate(ReadingData other)
-        {
-            Value += (int)other.GetValue();
-        }
-    }
-
     public class DoubleReadingData : ReadingData
     {
         public double Value { get; set; }
@@ -47,13 +29,14 @@ namespace Aqueduct.Diagnostics.Monitoring
 
     public abstract class ReadingData
     {
+        public string Name { get; set; }
         public abstract object GetValue();
         internal abstract void Aggregate(ReadingData other);        
     }
 
     public class Reading
     {
-        public string Name { get; set; }
+        public string DataPointName { get; set; }
         public ReadingData Data { get; set; }
         public object GetValue() { return Data.GetValue(); }
     }
