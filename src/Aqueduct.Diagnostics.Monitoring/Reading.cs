@@ -36,7 +36,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 
     public class Reading
     {
-        public string DataPointName { get; set; }
+        public string FeatureName { get; set; }
         public ReadingData Data { get; set; }
         public object GetValue() { return Data.GetValue(); }
     }

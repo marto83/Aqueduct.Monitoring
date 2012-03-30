@@ -26,35 +26,12 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             Assert.That(reading.Data.GetValue(), Is.EqualTo(1));
         }
 
-        [Test]
-        public void Increment_WhenNoDataPointNameAvailable_SetsReadingNameTo_Application()
-        {
-            var sensor = GetSensor();
-            sensor.Increment();
-
-            Reading reading = null;
-            NotificationProcessor.Readings.TryDequeue(out reading);
-            Assert.That(reading.DataPointName, Is.EqualTo("Application"));
-        }
-
-        [Test]
-        public void Increment_WhenDataPointNameIsInThreadContext_SetsReadingNameToIt()
-        {
-            string dataPointName = "datapointName";
-            CountSensor.SetDataPointName(dataPointName);
-
-            var sensor = GetSensor();
-            sensor.Increment();
-
-            Reading reading = null;
-            NotificationProcessor.Readings.TryDequeue(out reading);
-            Assert.That(reading.DataPointName, Is.EqualTo(dataPointName));
-        }
+        
 
         [TearDown]
         public void Teardown()
         {
-            CountSensor.SetDataPointName(null);
+            CountSensor.SetThreadwiseFeatureName(null);
             NotificationProcessor.Reset();
         }
     }

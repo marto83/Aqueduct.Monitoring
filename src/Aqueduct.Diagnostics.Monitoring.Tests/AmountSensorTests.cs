@@ -24,45 +24,4 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
 
 
     }
-
-    [TestFixture]
-    public class SensorBaseTests : MonitorTestBase
-    {
-        class SensorTestImpl : SensorBase
-        {
-            public SensorTestImpl(string readingName)
-                : base(readingName)
-            {
-                
-            }
-            
-            public void Add(ReadingData data)
-            {
-                AddReading(data);
-            }
-        }
-
-        [Test]
-        public void AddReading_WhenReadingDataNameNotSet_UsesTheSensorReadingName()
-        {
-            var sensor = new SensorTestImpl("test");
-
-            sensor.Add(new NumberReadingData(1));
-
-            Assert.That(NotificationProcessor.Readings.First().Data.Name, Is.EqualTo("test"));
-        }
-
-        [Test]
-        public void AddReading_WhenReadingDateNameIsSet_UsesTheReadingDataNameInsteadOfSensorReadingName()
-        {
-            string readingDataName = "ReadingDataName";
-            string sensorReadingName = "SenorReadingName";
-            var sensor = new SensorTestImpl(sensorReadingName);
-
-            sensor.Add(new NumberReadingData(1) { Name = readingDataName });
-
-            Assert.That(NotificationProcessor.Readings.First().Data.Name, Is.EqualTo(readingDataName));
-        }
-    }
 }
-

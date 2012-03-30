@@ -16,7 +16,7 @@ namespace Aqueduct.Diagnostics.Monitoring.MVC
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
             string dataPointName = filterContext.Controller.GetType().Name + "/" + filterContext.ActionDescriptor.ActionName;
-            SensorBase.SetDataPointName(dataPointName);
+            SensorBase.SetThreadwiseFeatureName(dataPointName);
 
             sensor.Increment();
             _watch.Start();

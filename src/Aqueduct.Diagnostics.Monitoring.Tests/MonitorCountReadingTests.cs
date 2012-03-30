@@ -31,7 +31,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             NotificationProcessor.Process();
 
             Assert.That(_dataPoints.Count, Is.EqualTo(1));
-            Assert.That(_dataPoints.First().Data.First().GetValue(), Is.EqualTo(2));
+            Assert.That(_dataPoints.First().Readings.First().GetValue(), Is.EqualTo(2));
         }
 
         [Test]

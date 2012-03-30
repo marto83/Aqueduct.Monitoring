@@ -9,21 +9,32 @@ namespace Aqueduct.Diagnostics.Monitoring
     public abstract class SensorBase
     {
         protected string ReadingName { get; private set; }
+        protected string FeatureName { get; private set; }
 
         public SensorBase(string readingName)
         {
             ReadingName = readingName;
         }
 
-        private const string DataPointNameSlot = "FeatureName";
-        protected static string GetDataPointName()
+        public SensorBase(string readingName, string featureName)
         {
-            return (string)Thread.GetData(Thread.GetNamedDataSlot(DataPointNameSlot)) ?? "Application";
+            ReadingName = readingName;
+            FeatureName = featureName;
         }
 
-        public static void SetDataPointName(string dataPointName)
+        private const string FeatureNameSlotName = "FeatureName";
+        protected string GetFeatureName()
         {
-            Thread.SetData(Thread.GetNamedDataSlot(DataPointNameSlot), dataPointName);
+            return FeatureName ?? (string)Thread.GetData(Thread.GetNamedDataSlot(FeatureNameSlotName)) ?? "Application";
+        }
+
+        /// <summary>
+        /// Once set all sensors in the current thread can automatically pick up the feature name
+        /// </summary>
+        /// <param name="featureName">FeatureName used for all readings</param>
+        public static void SetThreadwiseFeatureName(string featureName)
+        {
+            Thread.SetData(Thread.GetNamedDataSlot(FeatureNameSlotName), featureName);
         }
 
         protected void AddReading(ReadingData data)
@@ -31,7 +42,7 @@ namespace Aqueduct.Diagnostics.Monitoring
             if(string.IsNullOrEmpty(data.Name))
                 data.Name = ReadingName;
 
-            var newReading = new Reading() { DataPointName = GetDataPointName(), Data = data };
+            var newReading = new Reading() { FeatureName = GetFeatureName(), Data = data };
             NotificationProcessor.Add(newReading);
         }
     }

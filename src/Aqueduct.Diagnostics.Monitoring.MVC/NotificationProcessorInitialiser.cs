@@ -23,7 +23,7 @@ namespace Aqueduct.Diagnostics.Monitoring.MVC
             sensor.AddError(error);
         }
 
-        public static void Subscribe(string name, Action<IList<DataPoint>> dataAction)
+        public static void Subscribe(string name, Action<IList<FeatureStats>> dataAction)
         {
             var subscriber = new MonitorSubscriber(name, dataAction);
             NotificationProcessor.Subscribe(subscriber);

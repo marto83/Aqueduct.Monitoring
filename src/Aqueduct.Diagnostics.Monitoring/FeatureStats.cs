@@ -4,18 +4,16 @@ using System.Linq;
 
 namespace Aqueduct.Diagnostics.Monitoring
 {
-    public class DataPoint
+    public class FeatureStats
     {
         public DateTime Date { get; private set; }
         public string Name { get; set; }
-        public IList<ReadingData> Data { get; private set; }
+        public IList<ReadingData> Readings { get; private set; }
 
-        public DataPoint()
+        public FeatureStats()
         {
             Date = DateTime.Now;
-            Data = new List<ReadingData>();
+            Readings = new List<ReadingData>();
         }
-
-
     }
 }

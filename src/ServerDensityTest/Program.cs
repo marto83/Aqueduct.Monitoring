@@ -14,11 +14,11 @@ namespace ServerDensityTest
     {
         static void Main(string[] args)
         {
-            var newDataPoint = new DataPoint();
+            var newDataPoint = new FeatureStats();
             newDataPoint.Name = "IndexController";
-            newDataPoint.Data.Add(new NumberReadingData(10) { Name = "Requests" });
-            newDataPoint.Data.Add(new NumberReadingData(1) { Name = "Errors" });
-            List<DataPoint> points = new List<DataPoint> { newDataPoint };
+            newDataPoint.Readings.Add(new NumberReadingData(10) { Name = "Requests" });
+            newDataPoint.Readings.Add(new NumberReadingData(1) { Name = "Errors" });
+            List<FeatureStats> points = new List<FeatureStats> { newDataPoint };
 
             ServerDensityPayload payload = new ServerDensityPayload("WebsiteStats", "77a63a6e708acb1e7d88f86257b75783");
 
@@ -83,12 +83,12 @@ namespace ServerDensityTest
             plugins = new Dictionary<string, object>();
         }
 
-        public void AddDataPoints(IList<DataPoint> datapoints)
+        public void AddDataPoints(IList<FeatureStats> datapoints)
         {
             Dictionary<string, object> stats = new Dictionary<string, object>();
             foreach (var point in datapoints)
             {
-                foreach (var readingData in point.Data)
+                foreach (var readingData in point.Readings)
                 {
                     stats[point.Name + "_" + readingData.Name] = readingData.GetValue().ToString();
                 }

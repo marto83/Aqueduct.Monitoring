@@ -91,7 +91,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Process_WithNoReadings_PassesAnEmptyListOfDataPointsToAllSubscribers()
         {
-            IList<DataPoint> passedDataPoints = null;
+            IList<FeatureStats> passedDataPoints = null;
             NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
             {
                 passedDataPoints = dataPoints;
@@ -139,33 +139,33 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Process_WithTwoReadingsWithSameNameButDifferentReadingDataNames_SendsOneDataPointToSubscribersWithTwoReadingDataValues()
         {
-            IList<DataPoint> passedDataPoints = null;
+            IList<FeatureStats> passedDataPoints = null;
             NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
             {
                 passedDataPoints = dataPoints;
             }));
-            NotificationProcessor.Add(new Reading { DataPointName = "DataPointName", Data = new NumberReadingData(1) { Name = "Number" } });
-            NotificationProcessor.Add(new Reading { DataPointName = "DataPointName", Data = new NumberReadingData(1) { Name = "Error" } });
+            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new NumberReadingData(1) { Name = "Number" } });
+            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new NumberReadingData(1) { Name = "Error" } });
 
             NotificationProcessor.Initialise(100, false);
             NotificationProcessor.Process();
 
-            DataPoint dataPoint = passedDataPoints.First();
+            FeatureStats dataPoint = passedDataPoints.First();
 
-            Assert.That(dataPoint.Data.Count, Is.EqualTo(2));
-            Assert.That(dataPoint.Data.First().Name, Is.EqualTo("Number"));
-            Assert.That(dataPoint.Data.Last().Name, Is.EqualTo("Error"));
+            Assert.That(dataPoint.Readings.Count, Is.EqualTo(2));
+            Assert.That(dataPoint.Readings.First().Name, Is.EqualTo("Number"));
+            Assert.That(dataPoint.Readings.Last().Name, Is.EqualTo("Error"));
         }
 
         [Test]
         public void Process_WithAReading_SendsOneDataPointWithCurrentDate()
         {
-            IList<DataPoint> passedDataPoints = null;
+            IList<FeatureStats> passedDataPoints = null;
             NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
             {
                 passedDataPoints = dataPoints;
             }));
-            NotificationProcessor.Add(new Reading { DataPointName = "DataPointName", Data = new NumberReadingData(1) { Name = "Number" } });
+            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new NumberReadingData(1) { Name = "Number" } });
 
             NotificationProcessor.Initialise(100, false);
             NotificationProcessor.Process();
@@ -173,13 +173,13 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             Assert.That(passedDataPoints.First().Date - DateTime.Now, Is.LessThan(TimeSpan.FromSeconds(1)) );
         }
 
-        private MonitorSubscriber GetSubscriber(Action<IList<DataPoint>> action)
+        private MonitorSubscriber GetSubscriber(Action<IList<FeatureStats>> action)
         {
             return new MonitorSubscriber(String.Empty, action);
         }
         private static Reading GetReading()
         {
-            return new Reading() { DataPointName = "test", Data = new NumberReadingData(1) };
+            return new Reading() { FeatureName = "test", Data = new NumberReadingData(1) };
         }
     }
 }

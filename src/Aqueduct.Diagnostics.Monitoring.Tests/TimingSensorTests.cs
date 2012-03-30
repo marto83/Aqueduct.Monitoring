@@ -23,9 +23,9 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
                 NotificationProcessor.Readings.TryDequeue(out reading);
                 readings.Add(reading);
             }
-            Assert.That(readings.First().Data, Is.InstanceOfType<MinReadingData>());
-            Assert.That(readings.Skip(1).First().Data, Is.InstanceOfType<MaxReadingData>());
-            Assert.That(readings.Last().Data, Is.InstanceOfType<AvgReadingData>());
+            Assert.That(readings.First().Data, Is.InstanceOf<MinReadingData>());
+            Assert.That(readings.Skip(1).First().Data, Is.InstanceOf<MaxReadingData>());
+            Assert.That(readings.Last().Data, Is.InstanceOf<AvgReadingData>());
         }
 
         [Test]
@@ -47,12 +47,6 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             Assert.That(readings.First().Data.Name, Is.EqualTo(sensorName + " - Min"));
             Assert.That(readings.Skip(1).First().Data.Name, Is.EqualTo(sensorName + " - Max"));
             Assert.That(readings.Last().Data.Name, Is.EqualTo(sensorName + " - Avg"));
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            NotificationProcessor.Reset();
         }
     }
 

@@ -53,7 +53,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 
         internal static void Process()
         {
-            var dataPoints = new List<DataPoint>();
+            var dataPoints = new List<FeatureStats>();
             Reading reading;
             while (Readings.TryDequeue(out reading))
             {
@@ -63,25 +63,25 @@ namespace Aqueduct.Diagnostics.Monitoring
             NotifySubscribers(dataPoints);
         }
 
-        private static void ProcessReading(List<DataPoint> dataPoints, Reading reading)
+        private static void ProcessReading(List<FeatureStats> dataPoints, Reading reading)
         {
-            var dataPoint = dataPoints.FirstOrDefault(data => data.Name == reading.DataPointName);
+            var dataPoint = dataPoints.FirstOrDefault(data => data.Name == reading.FeatureName);
             if (dataPoint == null)
             {
-                dataPoint = new DataPoint() { Name = reading.DataPointName };
-                dataPoint.Data.Add(reading.Data);
+                dataPoint = new FeatureStats() { Name = reading.FeatureName };
+                dataPoint.Readings.Add(reading.Data);
                 dataPoints.Add(dataPoint);
             }
             else
             {
-                var readingData = dataPoint.Data.FirstOrDefault(rd => rd.Name == reading.Data.Name);
+                var readingData = dataPoint.Readings.FirstOrDefault(rd => rd.Name == reading.Data.Name);
                 if (readingData == null)
-                    dataPoint.Data.Add(reading.Data);
+                    dataPoint.Readings.Add(reading.Data);
                 else
                     readingData.Aggregate(reading.Data);
             }
         }
-        private static void NotifySubscribers(IList<DataPoint> dataPoints)
+        private static void NotifySubscribers(IList<FeatureStats> dataPoints)
         {
             if (_initialised == false) return;
 
