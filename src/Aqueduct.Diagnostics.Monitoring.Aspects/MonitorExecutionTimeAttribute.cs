@@ -40,7 +40,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Aspects
                     "{0}.{1}<{2}>",
                     declaringType.Name,
                     methodName,
-                    string.Join(", ", genericArguments.Select(t => t.Name).ToArray());
+                    string.Join(", ", genericArguments.Select(t => t.Name).ToArray()));
             }
 
             return string.Format("{0}.{1}", declaringType.Name, methodName);
