@@ -10,7 +10,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Sensors
 
 		public void Increment()
 		{
-			AddReading(new NumberReadingData(1));
+			AddReading(new Int32ReadingData(1));
 		}
 	}
 }

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Readings\DoubleReadingData.cs" />
+    <Compile Include="Readings\ReadingData.cs" />
     <Compile Include="Sensors\AmountSensor.cs" />
     <Compile Include="Readings\AvgReadingData.cs" />
     <Compile Include="Sensors\CountSensor.cs" />
@@ -55,7 +57,7 @@
     <Compile Include="Readings\MinReadingData.cs" />
     <Compile Include="NotificationProcessor.cs" />
     <Compile Include="MonitorSubscriber.cs" />
-    <Compile Include="Readings\NumberReadingData.cs" />
+    <Compile Include="Readings\Int32ReadingData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readings\Reading.cs" />
     <Compile Include="Sensors\SensorBase.cs" />

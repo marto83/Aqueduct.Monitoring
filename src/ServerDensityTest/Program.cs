@@ -17,8 +17,8 @@ namespace ServerDensityTest
         {
             var newDataPoint = new FeatureStats();
             newDataPoint.Name = "IndexController";
-            newDataPoint.Readings.Add(new NumberReadingData(10) { Name = "Requests" });
-            newDataPoint.Readings.Add(new NumberReadingData(1) { Name = "Errors" });
+            newDataPoint.Readings.Add(new Int32ReadingData(10) { Name = "Requests" });
+            newDataPoint.Readings.Add(new Int32ReadingData(1) { Name = "Errors" });
             List<FeatureStats> points = new List<FeatureStats> { newDataPoint };
 
             ServerDensityPayload payload = new ServerDensityPayload("WebsiteStats", "77a63a6e708acb1e7d88f86257b75783");

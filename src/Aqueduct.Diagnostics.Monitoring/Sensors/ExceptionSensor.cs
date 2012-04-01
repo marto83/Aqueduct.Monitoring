@@ -11,8 +11,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Sensors
 
 		public void AddError(Exception ex)
 		{
-			AddReading(new NumberReadingData(1) { Name = "TotalExceptions" });
-			AddReading(new NumberReadingData(1) { Name = ex.GetType().Name });
+			AddReading(new Int32ReadingData(1) { Name = "TotalExceptions" });
+			AddReading(new Int32ReadingData(1) { Name = ex.GetType().Name });
 		}
 	}
 }

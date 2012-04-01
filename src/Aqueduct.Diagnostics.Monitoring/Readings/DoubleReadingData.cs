@@ -1,10 +1,8 @@
-using System;
-
 namespace Aqueduct.Diagnostics.Monitoring.Readings
 {
-	public class MinReadingData : ReadingData
+	public class DoubleReadingData : ReadingData
 	{
-		public MinReadingData(double value)
+		public DoubleReadingData(double value)
 		{
 			Value = value;
 		}
@@ -18,7 +16,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Readings
 
 		internal override void Aggregate(ReadingData other)
 		{
-			Value = Math.Min(Value, (double)other.GetValue());
+			Value += (double)other.GetValue();
 		}
 	}
 }

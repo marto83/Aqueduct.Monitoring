@@ -33,7 +33,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
 
         protected Reading GetNumberReading(string name, int value)
         {
-            return new Reading() { FeatureName = name, Data = new NumberReadingData(value) };
+            return new Reading() { FeatureName = name, Data = new Int32ReadingData(value) };
         }
     }
 }

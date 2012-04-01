@@ -145,8 +145,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             {
                 passedDataPoints = dataPoints;
             }));
-            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new NumberReadingData(1) { Name = "Number" } });
-            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new NumberReadingData(1) { Name = "Error" } });
+            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Number" } });
+            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Error" } });
 
             NotificationProcessor.Initialise(100, false);
             NotificationProcessor.Process();
@@ -166,7 +166,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             {
                 passedDataPoints = dataPoints;
             }));
-            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new NumberReadingData(1) { Name = "Number" } });
+            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Number" } });
 
             NotificationProcessor.Initialise(100, false);
             NotificationProcessor.Process();
@@ -180,7 +180,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         }
         private static Reading GetReading()
         {
-            return new Reading() { FeatureName = "test", Data = new NumberReadingData(1) };
+            return new Reading() { FeatureName = "test", Data = new Int32ReadingData(1) };
         }
     }
 }
