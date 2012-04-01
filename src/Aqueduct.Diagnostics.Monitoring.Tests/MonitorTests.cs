@@ -14,50 +14,50 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Add_AddsReadingToMonitor()
         {
             var reading = GetReading();
-            NotificationProcessor.Add(reading);
+            ReadingPublisher.AddReading(reading);
 
-            Assert.AreEqual(1, NotificationProcessor.Readings.Count);
+            Assert.AreEqual(1, ReadingPublisher.Readings.Count);
         }
 
         [Test]
         public void Reset_ClearsAllMonitorReadings()
         {
             var reading = GetReading();
-            NotificationProcessor.Add(reading);
+            ReadingPublisher.AddReading(reading);
 
-            NotificationProcessor.Reset();
+            ReadingPublisher.Reset();
 
-            Assert.That(NotificationProcessor.Readings.Count, Is.EqualTo(0));
+            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(0));
         }
 
         [Test]
         public void Process_ClearsReadingsFromReadingsQueue()
         {
-            NotificationProcessor.Add(GetReading());
-            NotificationProcessor.Add(GetReading());
+            ReadingPublisher.AddReading(GetReading());
+            ReadingPublisher.AddReading(GetReading());
 
-            NotificationProcessor.Process();
+            ReadingPublisher.Process();
 
-            Assert.That(NotificationProcessor.Readings.Count, Is.EqualTo(0));
+            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(0));
         }
 
         [Test]
         public void Subscribe_RegistersSubscribesToTheMonitor()
         {
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => Console.Write("Subscribed")));
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) => Console.Write("Subscribed")));
 
-            Assert.That(NotificationProcessor.Subscribers.Count, Is.EqualTo(1));
+            Assert.That(ReadingPublisher.Subscribers.Count, Is.EqualTo(1));
         }
 
         [Test]
         public void Reset_ClearsAllSubscribers()
         {
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => Console.Write("Subscriber")));
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) => Console.Write("Subscriber")));
 
-            Assert.That(NotificationProcessor.Subscribers, Is.Not.Empty);
+            Assert.That(ReadingPublisher.Subscribers, Is.Not.Empty);
 
-            NotificationProcessor.Reset();
-            Assert.That(NotificationProcessor.Subscribers, Is.Empty);
+            ReadingPublisher.Reset();
+            Assert.That(ReadingPublisher.Subscribers, Is.Empty);
         }
 
         [Test]
@@ -65,10 +65,10 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         {
             bool sub1called = false;
             bool sub2called = false;
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => sub1called = true));
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => sub2called = true));
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) => sub1called = true));
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) => sub2called = true));
 
-            NotificationProcessor.Process();
+            ReadingPublisher.Process();
 
             Assert.That(sub1called, Is.True);
             Assert.That(sub2called, Is.True);
@@ -78,13 +78,13 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Process_WhenASubscriberFailsStillNotifiesTheRestOfTheSubscribers()
         {
             bool sub2called = false;
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) =>
             {
                 throw new Exception("Subscriber failed");
             }));
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) => sub2called = true));
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) => sub2called = true));
 
-            NotificationProcessor.Process();
+            ReadingPublisher.Process();
 
             Assert.That(sub2called, Is.True);
         }
@@ -92,13 +92,13 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Process_WithNoReadings_PassesAnEmptyListOfDataPointsToAllSubscribers()
         {
-            IList<FeatureStats> passedDataPoints = null;
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
+            IList<FeatureStatistics> passedDataPoints = null;
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) =>
             {
                 passedDataPoints = dataPoints;
             }));
 
-            NotificationProcessor.Process();
+            ReadingPublisher.Process();
 
             Assert.That(passedDataPoints, Is.Empty);
         }
@@ -107,12 +107,12 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Initialise_100MsForProcessTime_StartsATimeThatCallsAfter100ms()
         {
             bool processed = false;
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) =>
             {
                 processed = true;
             }));
 
-            NotificationProcessor.Initialise(100);
+            ReadingPublisher.Start(100);
 
             Thread.Sleep(150);
 
@@ -123,15 +123,15 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Shutdown_StopsEnsuresProcessIsNotCalledAgain()
         {
             bool processed = false;
-            Console.Write("Monitor Subscribers: " + NotificationProcessor.Subscribers.Count);
+            Console.Write("Monitor Subscribers: " + ReadingPublisher.Subscribers.Count);
             Console.Write("processed: " + processed);
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) =>
             {
                 processed = true;
             }));
 
-            NotificationProcessor.Initialise(100);
-            NotificationProcessor.Shutdown();
+            ReadingPublisher.Start(100);
+            ReadingPublisher.Stop();
             Thread.Sleep(150);
 
             Assert.That(processed, Is.False);
@@ -140,18 +140,18 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Process_WithTwoReadingsWithSameNameButDifferentReadingDataNames_SendsOneDataPointToSubscribersWithTwoReadingDataValues()
         {
-            IList<FeatureStats> passedDataPoints = null;
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
+            IList<FeatureStatistics> passedDataPoints = null;
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) =>
             {
                 passedDataPoints = dataPoints;
             }));
-            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Number" } });
-            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Error" } });
+            ReadingPublisher.AddReading(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Number" } });
+            ReadingPublisher.AddReading(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Error" } });
 
-            NotificationProcessor.Initialise(100, false);
-            NotificationProcessor.Process();
+            ReadingPublisher.Start(100, false);
+            ReadingPublisher.Process();
 
-            FeatureStats dataPoint = passedDataPoints.First();
+            FeatureStatistics dataPoint = passedDataPoints.First();
 
             Assert.That(dataPoint.Readings.Count, Is.EqualTo(2));
             Assert.That(dataPoint.Readings.First().Name, Is.EqualTo("Number"));
@@ -161,22 +161,22 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Process_WithAReading_SendsOneDataPointWithCurrentDate()
         {
-            IList<FeatureStats> passedDataPoints = null;
-            NotificationProcessor.Subscribe(GetSubscriber((dataPoints) =>
+            IList<FeatureStatistics> passedDataPoints = null;
+			ReadingPublisher.Subscribe(GetSubscriber((dataPoints) =>
             {
                 passedDataPoints = dataPoints;
             }));
-            NotificationProcessor.Add(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Number" } });
+            ReadingPublisher.AddReading(new Reading { FeatureName = "DataPointName", Data = new Int32ReadingData(1) { Name = "Number" } });
 
-            NotificationProcessor.Initialise(100, false);
-            NotificationProcessor.Process();
+            ReadingPublisher.Start(100, false);
+            ReadingPublisher.Process();
 
             Assert.That(passedDataPoints.First().Date - DateTime.Now, Is.LessThan(TimeSpan.FromSeconds(1)) );
         }
 
-        private MonitorSubscriber GetSubscriber(Action<IList<FeatureStats>> action)
+        private ReadingSubscriber GetSubscriber(Action<IList<FeatureStatistics>> action)
         {
-            return new MonitorSubscriber(String.Empty, action);
+            return new ReadingSubscriber(String.Empty, action);
         }
         private static Reading GetReading()
         {

@@ -18,10 +18,10 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             var sensor = GetSensor();
             sensor.Increment();
 
-            Assert.That(NotificationProcessor.Readings.Count, Is.EqualTo(1));
+            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(1));
 
             Reading reading = null;
-            NotificationProcessor.Readings.TryDequeue(out reading);
+            ReadingPublisher.Readings.TryDequeue(out reading);
             Assert.That(reading.Data.GetValue(), Is.EqualTo(1));
         }
 
@@ -31,7 +31,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Teardown()
         {
             CountSensor.SetThreadScopedFeatureName(null);
-            NotificationProcessor.Reset();
+            ReadingPublisher.Reset();
         }
     }
 }

@@ -15,11 +15,11 @@ namespace ServerDensityTest
     {
         static void Main(string[] args)
         {
-            var newDataPoint = new FeatureStats();
+            var newDataPoint = new FeatureStatistics();
             newDataPoint.Name = "IndexController";
             newDataPoint.Readings.Add(new Int32ReadingData(10) { Name = "Requests" });
             newDataPoint.Readings.Add(new Int32ReadingData(1) { Name = "Errors" });
-            List<FeatureStats> points = new List<FeatureStats> { newDataPoint };
+            List<FeatureStatistics> points = new List<FeatureStatistics> { newDataPoint };
 
             ServerDensityPayload payload = new ServerDensityPayload("WebsiteStats", "77a63a6e708acb1e7d88f86257b75783");
 
@@ -84,7 +84,7 @@ namespace ServerDensityTest
             plugins = new Dictionary<string, object>();
         }
 
-        public void AddDataPoints(IList<FeatureStats> datapoints)
+        public void AddDataPoints(IList<FeatureStatistics> datapoints)
         {
             Dictionary<string, object> stats = new Dictionary<string, object>();
             foreach (var point in datapoints)

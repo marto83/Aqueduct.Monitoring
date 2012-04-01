@@ -7,14 +7,14 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
 {
     public class ReadingTestsBase
     {
-        protected List<FeatureStats> _dataPoints;
+        protected List<FeatureStatistics> _dataPoints;
 
         [SetUp]
         public void Setup()
         {
-            _dataPoints = new List<FeatureStats>();
-            NotificationProcessor.Initialise(100, false);
-            NotificationProcessor.Subscribe(GetSubscriber((dp)
+            _dataPoints = new List<FeatureStatistics>();
+            ReadingPublisher.Start(100, false);
+			ReadingPublisher.Subscribe(GetSubscriber((dp)
                 =>
                 _dataPoints.AddRange(dp)
                 ));
@@ -23,12 +23,12 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [TearDown]
         public void Teardown()
         {
-            NotificationProcessor.Reset();
+            ReadingPublisher.Reset();
         }
 
-        private MonitorSubscriber GetSubscriber(Action<IList<FeatureStats>> action)
+        private ReadingSubscriber GetSubscriber(Action<IList<FeatureStatistics>> action)
         {
-            return new MonitorSubscriber("name", action);
+            return new ReadingSubscriber("name", action);
         }
 
         protected Reading GetNumberReading(string name, int value)

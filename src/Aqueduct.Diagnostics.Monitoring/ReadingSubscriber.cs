@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace Aqueduct.Diagnostics.Monitoring
 {
-    public class MonitorSubscriber
+    public class ReadingSubscriber
     {
-        public MonitorSubscriber(string name, Action<IList<FeatureStats>> action)
+        public ReadingSubscriber(string name, Action<IList<FeatureStatistics>> action)
         {
             Name = name;
             Action = action;
         }
 
         public string Name { get; private set; }
-        public Action<IList<FeatureStats>> Action { get; private set; }
+        public Action<IList<FeatureStatistics>> Action { get; private set; }
     }
 }
 

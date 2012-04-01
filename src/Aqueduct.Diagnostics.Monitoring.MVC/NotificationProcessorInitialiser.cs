@@ -11,7 +11,7 @@ namespace Aqueduct.Diagnostics.Monitoring.MVC
         public static void Initialise(GlobalFilterCollection filters)
         {
             filters.Add(new NotificationFilter());
-            NotificationProcessor.Initialise(60000);
+            ReadingPublisher.Start(60000);
         }
 
         public static void HandleError(Exception lastError)
@@ -23,15 +23,15 @@ namespace Aqueduct.Diagnostics.Monitoring.MVC
             sensor.AddError(error);
         }
 
-        public static void Subscribe(string name, Action<IList<FeatureStats>> dataAction)
+        public static void Subscribe(string name, Action<IList<FeatureStatistics>> dataAction)
         {
-            var subscriber = new MonitorSubscriber(name, dataAction);
-            NotificationProcessor.Subscribe(subscriber);
+            var subscriber = new ReadingSubscriber(name, dataAction);
+			ReadingPublisher.Subscribe(subscriber);
         }
 
         public static void Shutdown ()
         {
-            NotificationProcessor.Shutdown();
+            ReadingPublisher.Stop();
         }
     }
 }

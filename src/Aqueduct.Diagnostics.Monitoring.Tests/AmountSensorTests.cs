@@ -14,10 +14,10 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             double sensorValue = 10.5;
             sensor.Add(sensorValue);
 
-            Assert.That(NotificationProcessor.Readings.Count, Is.EqualTo(1));
+            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(1));
 
             Reading reading = null;
-            NotificationProcessor.Readings.TryDequeue(out reading);
+            ReadingPublisher.Readings.TryDequeue(out reading);
             Assert.That(reading.Data.GetValue(), Is.EqualTo(sensorValue));
         }
 

@@ -18,7 +18,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             sensor.AddError(new Exception());
 
             Reading reading = null;
-            NotificationProcessor.Readings.TryDequeue(out reading);
+            ReadingPublisher.Readings.TryDequeue(out reading);
 
             Assert.That(reading.Data.Name, Is.EqualTo("TotalExceptions"));
         }
@@ -32,8 +32,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             sensor.AddError(exception);
 
             Reading reading = null;
-            NotificationProcessor.Readings.TryDequeue(out reading); // TotalExceptions
-            NotificationProcessor.Readings.TryDequeue(out reading);
+            ReadingPublisher.Readings.TryDequeue(out reading); // TotalExceptions
+            ReadingPublisher.Readings.TryDequeue(out reading);
 
             Assert.That(reading.Data.Name, Is.EqualTo(exception.GetType().Name));
         }

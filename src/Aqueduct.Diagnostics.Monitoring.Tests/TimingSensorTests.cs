@@ -15,13 +15,13 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             var sensor = new TimingSensor("test");
             sensor.Add(10.5);
 
-            Assert.That(NotificationProcessor.Readings.Count, Is.EqualTo(3));
+            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(3));
 
             Reading reading = null;
             IList<Reading> readings = new List<Reading>();
             for (int i = 0; i < 3; i++)
             {
-                NotificationProcessor.Readings.TryDequeue(out reading);
+                ReadingPublisher.Readings.TryDequeue(out reading);
                 readings.Add(reading);
             }
             Assert.That(readings.First().Data, Is.InstanceOf<MinReadingData>());
@@ -36,13 +36,13 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             var sensor = new TimingSensor(sensorName);
             sensor.Add(10.5);
 
-            Assert.That(NotificationProcessor.Readings.Count, Is.EqualTo(3));
+            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(3));
 
             Reading reading = null;
             IList<Reading> readings = new List<Reading>();
             for (int i = 0; i < 3; i++)
             {
-                NotificationProcessor.Readings.TryDequeue(out reading);
+                ReadingPublisher.Readings.TryDequeue(out reading);
                 readings.Add(reading);
             }
             Assert.That(readings.First().Data.Name, Is.EqualTo(sensorName + " - Min"));

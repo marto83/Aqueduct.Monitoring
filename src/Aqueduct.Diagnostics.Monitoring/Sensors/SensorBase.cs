@@ -42,7 +42,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Sensors
 				data.Name = ReadingName;
 
 			var newReading = new Reading { FeatureName = GetFeatureName(), Data = data };
-			NotificationProcessor.Add(newReading);
+			ReadingPublisher.AddReading(newReading);
 		}
 	}
 }

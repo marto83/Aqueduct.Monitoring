@@ -42,7 +42,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
 
             sensor.Add(new Int32ReadingData(1));
 
-            Assert.That(NotificationProcessor.Readings.First().Data.Name, Is.EqualTo("test"));
+            Assert.That(ReadingPublisher.Readings.First().Data.Name, Is.EqualTo("test"));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
 
             sensor.Add(new Int32ReadingData(1) { Name = readingDataName });
 
-            Assert.That(NotificationProcessor.Readings.First().Data.Name, Is.EqualTo(readingDataName));
+            Assert.That(ReadingPublisher.Readings.First().Data.Name, Is.EqualTo(readingDataName));
         }
 
         [Test]
