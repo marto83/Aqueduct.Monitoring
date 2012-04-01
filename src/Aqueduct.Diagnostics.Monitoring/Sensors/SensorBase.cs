@@ -27,9 +27,9 @@ namespace Aqueduct.Diagnostics.Monitoring.Sensors
 		}
 
 		/// <summary>
-		/// Once set, all sensors in the current thread can automatically pick up the feature name.
+		/// Sets feature name for all sensors in the current thread.
 		/// </summary>
-		/// <param name="featureName">Feature name used for all readings.</param>
+		/// <param name="featureName">Feature name to be used for all sensors in the current thread.</param>
 		public static void SetThreadScopedFeatureName(string featureName)	// NOTE TO MG: Threadwise was not descriptive enough.
 		{
 			var localDataStoreSlot = Thread.GetNamedDataSlot(FeatureNameSlotName);
