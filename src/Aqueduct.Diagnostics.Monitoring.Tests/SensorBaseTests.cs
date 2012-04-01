@@ -69,7 +69,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void GetFeatureName_WhenFeatureNameIsInThreadContext_ReturnsTheOneFromTheThreadContext()
         {
             string featureName = "datapointName";
-            CountSensor.SetThreadwiseFeatureName(featureName);
+			CountSensor.SetThreadScopedFeatureName(featureName);
 
             var sensor = new SensorTestImpl("test");
 

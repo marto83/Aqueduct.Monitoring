@@ -8,7 +8,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [TearDown]
         public void TearDown()
         {
-            SensorBase.SetThreadwiseFeatureName(null);
+            SensorBase.SetThreadScopedFeatureName(null);
             NotificationProcessor.Reset();
         }
     }

@@ -30,7 +30,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [TearDown]
         public void Teardown()
         {
-            CountSensor.SetThreadwiseFeatureName(null);
+            CountSensor.SetThreadScopedFeatureName(null);
             NotificationProcessor.Reset();
         }
     }

@@ -3,44 +3,46 @@ using Aqueduct.Diagnostics.Monitoring.Readings;
 
 namespace Aqueduct.Diagnostics.Monitoring.Sensors
 {
-    public abstract class SensorBase
-    {
-        protected string ReadingName { get; private set; }
-        protected string FeatureName { get; private set; }
+	public abstract class SensorBase
+	{
+		const string FeatureNameSlotName = "FeatureName";
 
-        public SensorBase(string readingName)
-        {
-            ReadingName = readingName;
-        }
+		protected SensorBase(string readingName)
+		{
+			ReadingName = readingName;
+		}
 
-        public SensorBase(string readingName, string featureName)
-        {
-            ReadingName = readingName;
-            FeatureName = featureName;
-        }
+		protected SensorBase(string readingName, string featureName)
+		{
+			ReadingName = readingName;
+			FeatureName = featureName;
+		}
 
-        private const string FeatureNameSlotName = "FeatureName";
-        protected string GetFeatureName()
-        {
-            return FeatureName ?? (string)Thread.GetData(Thread.GetNamedDataSlot(FeatureNameSlotName)) ?? "Application";
-        }
+		protected string ReadingName { get; private set; }
+		protected string FeatureName { get; private set; }
 
-        /// <summary>
-        /// Once set all sensors in the current thread can automatically pick up the feature name
-        /// </summary>
-        /// <param name="featureName">FeatureName used for all readings</param>
-        public static void SetThreadwiseFeatureName(string featureName)
-        {
-            Thread.SetData(Thread.GetNamedDataSlot(FeatureNameSlotName), featureName);
-        }
+		protected string GetFeatureName()
+		{
+			return FeatureName ?? (string)Thread.GetData(Thread.GetNamedDataSlot(FeatureNameSlotName)) ?? "Application";
+		}
 
-        protected void AddReading(ReadingData data)
-        {
-            if(string.IsNullOrEmpty(data.Name))
-                data.Name = ReadingName;
+		/// <summary>
+		/// Once set, all sensors in the current thread can automatically pick up the feature name.
+		/// </summary>
+		/// <param name="featureName">Feature name used for all readings.</param>
+		public static void SetThreadScopedFeatureName(string featureName)	// NOTE TO MG: Threadwise was not descriptive enough.
+		{
+			var localDataStoreSlot = Thread.GetNamedDataSlot(FeatureNameSlotName);
+			Thread.SetData(localDataStoreSlot, featureName);
+		}
 
-            var newReading = new Reading() { FeatureName = GetFeatureName(), Data = data };
-            NotificationProcessor.Add(newReading);
-        }
-    }
+		protected void AddReading(ReadingData data)
+		{
+			if (string.IsNullOrEmpty(data.Name))
+				data.Name = ReadingName;
+
+			var newReading = new Reading { FeatureName = GetFeatureName(), Data = data };
+			NotificationProcessor.Add(newReading);
+		}
+	}
 }
