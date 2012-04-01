@@ -146,7 +146,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 				{
 					try
 					{
-						subscriber.Action(dataPoints);
+						subscriber.ProcessStatistics(dataPoints);
 					}
 					catch (Exception ex)
 					{

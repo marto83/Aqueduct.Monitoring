@@ -5,14 +5,13 @@ namespace Aqueduct.Diagnostics.Monitoring
 {
     public class ReadingSubscriber
     {
-        public ReadingSubscriber(string name, Action<IList<FeatureStatistics>> action)
+        public ReadingSubscriber(string name, Action<IList<FeatureStatistics>> statisticsProcessorAction)
         {
             Name = name;
-            Action = action;
+            ProcessStatistics = statisticsProcessorAction;
         }
 
         public string Name { get; private set; }
-        public Action<IList<FeatureStatistics>> Action { get; private set; }
+        public Action<IList<FeatureStatistics>> ProcessStatistics { get; private set; }
     }
 }
-
