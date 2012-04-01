@@ -10,8 +10,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Process_WithMultipleReadings_CombinesTheReadingsIntoDataPoint()
         {
             string readingName = "test";
-            ReadingPublisher.AddReading(GetNumberReading(readingName, 1));
-            ReadingPublisher.AddReading(GetNumberReading(readingName, 1));
+            ReadingPublisher.PublishReading(GetNumberReading(readingName, 1));
+            ReadingPublisher.PublishReading(GetNumberReading(readingName, 1));
 
             ReadingPublisher.Process();
 
@@ -23,8 +23,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         public void Process_WithMultipleReadings_PassesOnOneDataPointWithCombinedDataToSubscribers()
         {
             string readingName = "test";
-            ReadingPublisher.AddReading(GetNumberReading(readingName, 1));
-            ReadingPublisher.AddReading(GetNumberReading(readingName, 1));
+            ReadingPublisher.PublishReading(GetNumberReading(readingName, 1));
+            ReadingPublisher.PublishReading(GetNumberReading(readingName, 1));
 
             ReadingPublisher.Process();
 
@@ -35,8 +35,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         [Test]
         public void Process_With2ReadingsWithDifferentNames_PassesOnTwoSeparateDataPointsToSubscribers()
         {
-            ReadingPublisher.AddReading(GetNumberReading("test", 1));
-            ReadingPublisher.AddReading(GetNumberReading("test1", 1));
+            ReadingPublisher.PublishReading(GetNumberReading("test", 1));
+            ReadingPublisher.PublishReading(GetNumberReading("test1", 1));
 
             ReadingPublisher.Process();
 

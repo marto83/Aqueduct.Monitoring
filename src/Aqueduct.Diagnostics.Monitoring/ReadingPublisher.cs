@@ -11,7 +11,10 @@ namespace Aqueduct.Diagnostics.Monitoring
 	{
 		static Timer _timer;
 		static readonly ILogger Logger = AppLogger.GetNamedLogger(typeof(ReadingPublisher));
-		static volatile bool _initialised;
+		static bool _initialised;
+		static readonly object InitialisationLock = new object();
+		static readonly object AddSubscriberLock = new object();
+		static readonly object PublishReadingLock = new object();
 
 		static ReadingPublisher()
 		{
@@ -24,42 +27,73 @@ namespace Aqueduct.Diagnostics.Monitoring
 
 		public static void Start(int processInterval, bool enableTimer = true)
 		{
-			_timer = new Timer();
-			_timer.Interval = processInterval;
-			_timer.Elapsed += Timer_Elapsed;
+			if (_initialised)
+				return;
 
-			if (enableTimer)
-				_timer.Start();
+			lock (InitialisationLock)
+			{
+				if (_initialised)
+					return;
 
-			_initialised = true;
+				_timer = new Timer();
+				_timer.Interval = processInterval;
+				_timer.Elapsed += Timer_Elapsed;
+
+				if (enableTimer)
+					_timer.Start();
+
+				_initialised = true;
+			}
 		}
 
 		public static void Stop()
 		{
-			_initialised = false;
-
-			if (_timer == null)
+			if (_initialised == false)
 				return;
 
-			_timer.Stop();
-			_timer.Elapsed -= Timer_Elapsed;
-			_timer.Dispose();
+			lock (InitialisationLock)
+			{
+				if (_initialised == false)
+					return;
+
+				if (_timer == null)
+					return;
+
+				_timer.Stop();
+				_timer.Elapsed -= Timer_Elapsed;
+				_timer.Dispose();
+
+				_initialised = false;
+			}
 		}
 
 		public static void Subscribe(ReadingSubscriber subscriber)
 		{
-			Subscribers.Add(subscriber);
+			lock (AddSubscriberLock)
+			{
+				Subscribers.Add(subscriber);
+			}
 		}
 
-		public static void AddReading(Reading reading)
+		public static void PublishReading(Reading reading)
 		{
-			Readings.Enqueue(reading);
+			lock (PublishReadingLock)
+			{
+				Readings.Enqueue(reading);
+			}
 		}
 
 		internal static void Reset()
 		{
-			Readings = new ConcurrentQueue<Reading>();
-			Subscribers.Clear();
+			lock (PublishReadingLock)
+			{
+				Readings = new ConcurrentQueue<Reading>();
+			}
+
+			lock (AddSubscriberLock)
+			{
+				Subscribers.Clear();
+			}
 		}
 
 		internal static void Process()
@@ -100,17 +134,24 @@ namespace Aqueduct.Diagnostics.Monitoring
 
 		static void NotifySubscribers(IList<FeatureStatistics> dataPoints)
 		{
-			if (_initialised == false) return;
+			if (_initialised == false)
+				return;
 
-			foreach (var subscriber in Subscribers)
+			lock (InitialisationLock)
 			{
-				try
+				if (_initialised == false)
+					return;
+
+				foreach (var subscriber in Subscribers)
 				{
-					subscriber.Action(dataPoints);
-				}
-				catch (Exception ex)
-				{
-					Logger.LogError(String.Format("Error while executing subscriber: {0}", subscriber.Name), ex);
+					try
+					{
+						subscriber.Action(dataPoints);
+					}
+					catch (Exception ex)
+					{
+						Logger.LogError(String.Format("Error while executing subscriber: {0}", subscriber.Name), ex);
+					}
 				}
 			}
 		}
