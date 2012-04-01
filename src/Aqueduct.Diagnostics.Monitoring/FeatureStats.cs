@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Aqueduct.Diagnostics.Monitoring.Readings;
 
 namespace Aqueduct.Diagnostics.Monitoring
 {

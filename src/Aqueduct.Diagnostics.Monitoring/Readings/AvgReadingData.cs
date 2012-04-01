@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aqueduct.Diagnostics.Monitoring
+namespace Aqueduct.Diagnostics.Monitoring.Readings
 {
     public class AvgReadingData : ReadingData
     {

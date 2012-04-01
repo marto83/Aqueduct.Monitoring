@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Aqueduct.Diagnostics.Monitoring.Sensors;
 
 namespace Aqueduct.Diagnostics.Monitoring.MVC
 {

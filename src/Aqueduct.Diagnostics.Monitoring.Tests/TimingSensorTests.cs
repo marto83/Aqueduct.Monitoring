@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Aqueduct.Diagnostics.Monitoring.Readings;
+using Aqueduct.Diagnostics.Monitoring.Sensors;
 using NUnit.Framework;
 
 namespace Aqueduct.Diagnostics.Monitoring.Tests

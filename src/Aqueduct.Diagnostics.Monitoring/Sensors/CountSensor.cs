@@ -1,4 +1,6 @@
-namespace Aqueduct.Diagnostics.Monitoring
+using Aqueduct.Diagnostics.Monitoring.Readings;
+
+namespace Aqueduct.Diagnostics.Monitoring.Sensors
 {
     public class CountSensor : SensorBase
     {

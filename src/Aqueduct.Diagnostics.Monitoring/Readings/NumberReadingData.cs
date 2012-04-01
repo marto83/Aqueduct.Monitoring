@@ -1,4 +1,4 @@
-namespace Aqueduct.Diagnostics.Monitoring
+namespace Aqueduct.Diagnostics.Monitoring.Readings
 {
     public class NumberReadingData : ReadingData
     {

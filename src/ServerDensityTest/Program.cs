@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Collections.Specialized;
 using Aqueduct.Diagnostics.Monitoring;
+using Aqueduct.Diagnostics.Monitoring.Readings;
 using Newtonsoft.Json;
 using System.Web;
 

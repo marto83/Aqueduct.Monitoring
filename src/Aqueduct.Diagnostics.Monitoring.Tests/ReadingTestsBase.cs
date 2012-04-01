@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Aqueduct.Diagnostics.Monitoring.Readings;
 using NUnit.Framework;
 
 namespace Aqueduct.Diagnostics.Monitoring.Tests

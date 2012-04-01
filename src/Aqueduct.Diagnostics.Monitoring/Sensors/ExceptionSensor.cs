@@ -1,6 +1,7 @@
 using System;
+using Aqueduct.Diagnostics.Monitoring.Readings;
 
-namespace Aqueduct.Diagnostics.Monitoring
+namespace Aqueduct.Diagnostics.Monitoring.Sensors
 {
     public class ExceptionSensor : SensorBase
     {

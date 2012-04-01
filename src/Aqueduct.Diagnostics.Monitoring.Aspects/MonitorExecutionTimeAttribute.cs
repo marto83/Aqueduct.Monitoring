@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Aqueduct.Diagnostics.Monitoring.Sensors;
 using PostSharp.Aspects;
 using System.Diagnostics;
 

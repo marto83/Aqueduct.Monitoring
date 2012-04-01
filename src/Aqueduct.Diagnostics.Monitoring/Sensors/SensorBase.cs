@@ -1,6 +1,7 @@
 ﻿using System.Threading;
+using Aqueduct.Diagnostics.Monitoring.Readings;
 
-namespace Aqueduct.Diagnostics.Monitoring
+namespace Aqueduct.Diagnostics.Monitoring.Sensors
 {
     public abstract class SensorBase
     {

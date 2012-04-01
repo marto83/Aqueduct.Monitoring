@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web;
+using Aqueduct.Diagnostics.Monitoring.Sensors;
 
 namespace Aqueduct.Diagnostics.Monitoring.MVC
 {
