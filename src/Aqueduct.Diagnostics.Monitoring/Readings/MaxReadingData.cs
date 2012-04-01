@@ -11,7 +11,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Readings
 
 		public double Value { get; private set; }
 
-		public override object GetValue()
+		public override dynamic GetValue()
 		{
 			return Value;
 		}

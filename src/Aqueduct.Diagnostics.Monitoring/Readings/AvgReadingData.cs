@@ -13,7 +13,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Readings
 
 		public IList<double> Values { get; private set; }
 
-		public override object GetValue()
+		public override dynamic GetValue()
 		{
 			return Values.Average();
 		}
