@@ -8,11 +8,11 @@ namespace Aqueduct.Diagnostics.Monitoring
 	{
 		public FeatureStatistics()
 		{
-			Date = DateTime.Now;
+			Timestamp = DateTimeOffset.Now;
 			Readings = new List<ReadingData>();
 		}
 
-		public DateTime Date { get; private set; }
+		public DateTimeOffset Timestamp { get; private set; }
 		public string Name { get; set; }
 		public IList<ReadingData> Readings { get; private set; }
 	}

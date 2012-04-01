@@ -172,7 +172,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             ReadingPublisher.Start(100, false);
             ReadingPublisher.Process();
 
-            Assert.That(passedDataPoints.First().Date - DateTime.Now, Is.LessThan(TimeSpan.FromSeconds(1)) );
+            Assert.That(passedDataPoints.First().Timestamp - DateTime.Now, Is.LessThan(TimeSpan.FromSeconds(1)) );
         }
 
         private ReadingSubscriber GetSubscriber(Action<IList<FeatureStatistics>> action)
