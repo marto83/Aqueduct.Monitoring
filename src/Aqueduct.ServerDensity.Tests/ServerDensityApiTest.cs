@@ -17,14 +17,16 @@ namespace Aqueduct.ServerDensity.Tests
 
     public class AlertsApi : IAlertsApi
     {
-        public AlertsApi()
+        private const string ModuleName = "alerts";
+        private readonly ServerDensityApi _ApiBase;
+        public AlertsApi(ServerDensityApi apiBase)
         {
-
+            _ApiBase = apiBase;       
         }
 
         public string GetLast()
         {
-            return "something";
+            return _ApiBase.CallUrl(ModuleName, "getLast");
         }
     }
     public interface IAlertsApi
@@ -57,6 +59,7 @@ namespace Aqueduct.ServerDensity.Tests
     }
     public class ServerDensityApi : IServerDensityApi
     {
+        private const string UrlTemplate = "https://{0}/{1}/{2}/{3}?account={4}&apiKey={5}{6}";
         private string _apiKey;
         private NetworkCredential _credentials;
         private string _version;
@@ -84,6 +87,11 @@ namespace Aqueduct.ServerDensity.Tests
             return new ServerDensityApi(settings) { RequestClient = requestClient ?? new RequestClient() };
         }
 
+        internal string CallUrl(string module, string method)
+        {
+            return RequestClient.Get(string.Format(UrlTemplate, _apiUrl, _version, module, method, _account, _apiKey, ""));
+        }
+
         public string Version { get { return _version; } }
 
         private ServerDensityApi(ServerDensitySettings settings)
@@ -94,7 +102,7 @@ namespace Aqueduct.ServerDensity.Tests
             _apiUrl = settings.ApiUrl;
             _version = settings.Version;
 
-            Alerts = new AlertsApi();
+            Alerts = new AlertsApi(this);
         }
 
         public IAlertsApi Alerts { get; private set; }
@@ -119,37 +127,6 @@ namespace Aqueduct.ServerDensity.Tests
             ApiUrl = "api.serverdensity.com";
             Version = "1.4";
         }
-    }
-
-    public abstract class TestBase
-    {
-        private const string UrlTemplate = "https://{0}/{1}/{2}/{3}?account={4}&apiKey={5}{6}";
-        protected Mock<IRequestClient> RequestClientMock;
-
-        [SetUp]
-        public void Setup()
-        {
-            RequestClientMock = new Mock<IRequestClient>();
-        }
-
-
-        protected string GetExpectedUrl(string module, string method)
-        {
-            var setting = GetValidSettings();
-            return String.Format(UrlTemplate, setting.ApiUrl, setting.Version, module, method, setting.Account, setting.ApiKey, "");
-        }
-
-        protected ServerDensitySettings GetValidSettings()
-        {
-            return new ServerDensitySettings("account", "key", new NetworkCredential("user", "pass"));
-        }
-
-        protected IServerDensityApi GetApi()
-        {
-            return ServerDensityApi.Initialise(GetValidSettings(), RequestClientMock.Object);
-        }
-
-
     }
 
     [TestFixture]
@@ -219,7 +196,7 @@ namespace Aqueduct.ServerDensity.Tests
         {
             var api = GetApi();
             
-            var expectedUrl = GetExpectedUrl("alerts", "getlast");
+            var expectedUrl = GetExpectedUrl("alerts", "getLast");
             api.Alerts.GetLast();
             RequestClientMock.Verify(x => x.Get(expectedUrl));
 
