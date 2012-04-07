@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Aqueduct.ServerDensity
 {
-    
+    public interface IServerDensityApi
+    {
+        IMetricsApi Metrics { get; }
+        IAlertsApi Alerts { get; }
+        string Version { get; }
+    }
 }
