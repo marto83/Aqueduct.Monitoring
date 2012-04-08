@@ -41,10 +41,11 @@ namespace Aqueduct.ServerDensity
             return RequestClient.Get(string.Format(UrlTemplate, _apiUrl, _version, module, method, _account, _apiKey, ""));
         }
 
-        public string PostTo(string module, string method, object data)
+        public string PostTo(string module, string method, NameValueCollection extraQueryParams, NameValueCollection postData)
         {
-            return RequestClient.Post(string.Format(UrlTemplate, _apiUrl, _version, module, method, _account, _apiKey, ""), "");
+            return RequestClient.Post(string.Format(UrlTemplate, _apiUrl, _version, module, method, _account, _apiKey, extraQueryParams.ToQueryString()), postData.ToQueryString());
         }
+
         public string Version { get { return _version; } }
 
         private ServerDensityApi(ServerDensitySettings settings)

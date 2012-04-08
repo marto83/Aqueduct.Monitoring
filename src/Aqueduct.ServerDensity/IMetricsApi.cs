@@ -6,6 +6,6 @@ namespace Aqueduct.ServerDensity
 {
     public interface IMetricsApi
     {
-        string UploadPluginData(string deviceId, string agentKey, Dictionary<string, object> plugins);
+        string UploadPluginData(string deviceId, MetricsPayload payload);
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
+using System.Collections.Specialized;
 
 namespace Aqueduct.ServerDensity
 {
-    public class MetricsApi : IMetricsApi
+    public sealed class MetricsApi : IMetricsApi
     {
         private const string ModuleName = "metrics";
         private readonly ServerDensityApi _ApiBase;
@@ -18,14 +19,13 @@ namespace Aqueduct.ServerDensity
             _ApiBase = apiBase;
         }
 
-        public string UploadPluginData(string deviceId, string agentKey, Dictionary<string, object> plugins)
+        public string UploadPluginData(string deviceId, MetricsPayload payload)
         {
-            return _ApiBase.PostTo(ModuleName, "postback", "&payload=" + HttpUtility.UrlEncode(GetPluginsJson(agentKey, plugins)));
-        }
+            NameValueCollection postData = new NameValueCollection();
+            postData["payload"] = JsonConvert.SerializeObject(payload);
 
-        private string GetPluginsJson(string agentKey, Dictionary<string, object> plugins)
-        {
-            return JsonConvert.SerializeObject(new { agentKey = agentKey, plugins = plugins });
+            return _ApiBase.PostTo(ModuleName, "postback", null, postData);
         }
     }
+
 }

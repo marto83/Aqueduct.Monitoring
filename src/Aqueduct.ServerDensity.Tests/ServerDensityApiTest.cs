@@ -9,8 +9,6 @@ using Moq;
 
 namespace Aqueduct.ServerDensity.Tests
 {
-   
-
     [TestFixture]
     public class ServerDensityApiTest : TestBase
     {
@@ -93,10 +91,8 @@ namespace Aqueduct.ServerDensity.Tests
             var api = GetApi();
 
             var expectedUrl = GetExpectedUrl("metrics", "postback");
-            api.Metrics.UploadPluginData("","", null);
+            api.Metrics.UploadPluginData("", null);
             RequestClientMock.Verify(x => x.Post(expectedUrl, It.IsAny<string>()));
         }
-
-
     }
 }

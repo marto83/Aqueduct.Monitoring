@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Aqueduct.ServerDensity
 {
-    public class AlertsApi : IAlertsApi
+    public sealed class AlertsApi : IAlertsApi
     {
         private const string ModuleName = "alerts";
         private readonly ServerDensityApi _ApiBase;
