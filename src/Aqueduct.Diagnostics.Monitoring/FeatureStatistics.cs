@@ -10,10 +10,12 @@ namespace Aqueduct.Diagnostics.Monitoring
 		{
 			Timestamp = DateTimeOffset.Now;
 			Readings = new List<ReadingData>();
+            Group = string.Empty;
 		}
 
 		public DateTimeOffset Timestamp { get; private set; }
 		public string Name { get; set; }
+        public string Group { get; set; }
 		public IList<ReadingData> Readings { get; private set; }
 	}
 }

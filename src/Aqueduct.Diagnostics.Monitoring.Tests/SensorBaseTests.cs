@@ -2,6 +2,7 @@ using System.Linq;
 using Aqueduct.Diagnostics.Monitoring.Readings;
 using Aqueduct.Diagnostics.Monitoring.Sensors;
 using NUnit.Framework;
+using System;
 
 namespace Aqueduct.Diagnostics.Monitoring.Tests
 {
@@ -10,14 +11,8 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
     {
         class SensorTestImpl : SensorBase
         {
-            public SensorTestImpl(string readingName)
-                : base(readingName)
-            {
-
-            }
-
-            public SensorTestImpl(string readingName, string featureName)
-                : base(readingName, featureName)
+            public SensorTestImpl(string readingName, string featureName = null, string featureGroup = "")
+                : base(readingName, featureName, featureGroup)
             {
                 
             }
@@ -32,8 +27,6 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
                 AddReading(data);
             }
         }
-
-        
 
         [Test]
         public void AddReading_WhenReadingDataNameNotSet_UsesTheSensorReadingName()
@@ -86,6 +79,26 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
             Assert.That(sensor.GetFeatureNameExposed(), Is.EqualTo(featureName));
         }
 
+        [Test]
+        public void GetFeatureGroup_WithoutOneSpecified_SetsGroupToBlank()
+        {
+            var sensor = new SensorTestImpl("test", "featureName");
+
+            sensor.Add(new Int32ReadingData(1));
+
+            Assert.That(ReadingPublisher.Readings.First().FeatureGroup, Is.EqualTo(string.Empty));
+        }
+
+        [Test]
+        public void GetFeatureGroup_WithOneSet_SetsCorrectGroupToReading()
+        {
+            string group = "featureGroup";
+            var sensor = new SensorTestImpl("test", "featureName", group);
+
+            sensor.Add(new Int32ReadingData(1));
+
+            Assert.That(ReadingPublisher.Readings.First().FeatureGroup, Is.EqualTo(group));
+        }
     
         
     }

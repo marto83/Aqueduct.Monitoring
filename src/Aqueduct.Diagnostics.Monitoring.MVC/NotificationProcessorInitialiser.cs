@@ -11,7 +11,7 @@ namespace Aqueduct.Diagnostics.Monitoring.MVC
         public static void Initialise(GlobalFilterCollection filters)
         {
             filters.Add(new NotificationFilter());
-            ReadingPublisher.Start(60000);
+            ReadingPublisher.Start((int)TimeSpan.FromMinutes(1).TotalMilliseconds);
         }
 
         public static void HandleError(Exception lastError)
