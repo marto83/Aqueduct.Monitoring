@@ -17,6 +17,11 @@ namespace Aqueduct.ServerDensity
 
         private IRequestClient RequestClient { get; set; }
 
+        public static IServerDensityApi Initialise()
+        {
+            return Initialise(ServerDensitySettings.GetFromAppConfig());
+        }
+
         public static IServerDensityApi Initialise(ServerDensitySettings settings)
         {
             return Initialise(settings, null);

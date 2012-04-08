@@ -43,6 +43,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerDensitySubscriber.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aqueduct.Diagnostics.Monitoring\Aqueduct.Diagnostics.Monitoring.csproj">
+      <Project>{247488B0-2551-415F-B68E-205FA66FD061}</Project>
+      <Name>Aqueduct.Diagnostics.Monitoring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aqueduct.ServerDensity\Aqueduct.ServerDensity.csproj">
+      <Project>{8D620CCB-B482-4D1F-A97F-D71C4935161F}</Project>
+      <Name>Aqueduct.ServerDensity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
