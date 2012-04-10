@@ -8,7 +8,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Aspects
 {
     [Serializable]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
-    public sealed class MonitorMethodExecutionTimeAttribute : MethodInterceptionAspect
+    public sealed class MonitorExecutionTimeAttribute : MethodInterceptionAspect
     {
         // Record time spent executing the method
         public override void OnInvoke(MethodInterceptionArgs eventArgs)
