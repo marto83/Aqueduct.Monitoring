@@ -3,11 +3,13 @@ using System.Linq;
 using Aqueduct.Diagnostics.Monitoring.Sensors;
 using PostSharp.Aspects;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 
 namespace Aqueduct.Diagnostics.Monitoring.Aspects
 {
+
     [Serializable]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
+    [AttributeUsage(AttributeTargets.Method)]
     public sealed class MonitorExecutionTimeAttribute : MethodInterceptionAspect
     {
         // Record time spent executing the method

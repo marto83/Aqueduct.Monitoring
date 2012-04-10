@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aspects\MonitoredFeatureAttribute.cs" />
     <Compile Include="Aspects\MonitorExecutionTimeAttribute.cs" />
+    <Compile Include="FeatureDescriptor.cs" />
     <Compile Include="Readings\DoubleReadingData.cs" />
     <Compile Include="Readings\ReadingData.cs" />
     <Compile Include="Sensors\AmountSensor.cs" />
