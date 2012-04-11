@@ -10,44 +10,30 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
     public class TimingSensorTests : MonitorTestBase
     {
         [Test]
-        public void Add_CreatesThreeReadingsWithMinMaxAndAvgReadingData()
+        public void Add_CreatesAvgReading()
         {
             var sensor = new TimingSensor("test");
             sensor.Add(10.5);
 
-            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(3));
+            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(1));
 
             Reading reading = null;
-            IList<Reading> readings = new List<Reading>();
-            for (int i = 0; i < 3; i++)
-            {
-                ReadingPublisher.Readings.TryDequeue(out reading);
-                readings.Add(reading);
-            }
-            Assert.That(readings.First().Data, Is.InstanceOf<MinReadingData>());
-            Assert.That(readings.Skip(1).First().Data, Is.InstanceOf<MaxReadingData>());
-            Assert.That(readings.Last().Data, Is.InstanceOf<AvgReadingData>());
+            ReadingPublisher.Readings.TryDequeue(out reading);
+            Assert.That(reading.Data, Is.InstanceOf<AvgReadingData>());
         }
 
         [Test]
-        public void Add_CreatesThreeReadingsWithNamesWhichAreACombinationOfSensorNameAndMinMaxAvg()
+        public void Add_CreatesAvgReadingWithCorrectName()
         {
             string sensorName = "test";
             var sensor = new TimingSensor(sensorName);
             sensor.Add(10.5);
 
-            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(3));
+            Assert.That(ReadingPublisher.Readings.Count, Is.EqualTo(1));
 
             Reading reading = null;
-            IList<Reading> readings = new List<Reading>();
-            for (int i = 0; i < 3; i++)
-            {
-                ReadingPublisher.Readings.TryDequeue(out reading);
-                readings.Add(reading);
-            }
-            Assert.That(readings.First().Data.Name, Is.EqualTo(sensorName + " - Min"));
-            Assert.That(readings.Skip(1).First().Data.Name, Is.EqualTo(sensorName + " - Max"));
-            Assert.That(readings.Last().Data.Name, Is.EqualTo(sensorName + " - Avg"));
+            ReadingPublisher.Readings.TryDequeue(out reading);
+            Assert.That(reading.Data.Name, Is.EqualTo(sensorName + " - Avg ms"));
         }
     }
 

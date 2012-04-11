@@ -27,6 +27,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 
 		public static void Start(int processInterval, bool enableTimer = true)
 		{
+            Logger.LogDebugMessage("Starting publisher");
 			if (_initialised)
 				return;
 
@@ -34,7 +35,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 			{
 				if (_initialised)
 					return;
-
+                Logger.LogDebugMessage("Initialising timer");
 				_timer = new Timer();
 				_timer.Interval = processInterval;
 				_timer.Elapsed += Timer_Elapsed;
@@ -48,6 +49,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 
 		public static void Stop()
 		{
+            Logger.LogDebugMessage("Stopping timer and disposing of the timer");
 			if (_initialised == false)
 				return;
 
@@ -69,6 +71,8 @@ namespace Aqueduct.Diagnostics.Monitoring
 
 		public static void Subscribe(ReadingSubscriber subscriber)
 		{
+            Logger.LogDebugMessage("Adding subscriber " + subscriber.Name);
+
 			lock (AddSubscriberLock)
 			{
 				Subscribers.Add(subscriber);
@@ -77,14 +81,23 @@ namespace Aqueduct.Diagnostics.Monitoring
 
 		public static void PublishReading(Reading reading)
 		{
+            Logger.LogDebugMessage("Enqueuing reding " + GetReadingInfo(reading));
 			lock (PublishReadingLock)
 			{
 				Readings.Enqueue(reading);
 			}
 		}
 
-		internal static void Reset()
+        private static string GetReadingInfo(Reading reading)
+        {
+            if (reading != null)
+                return String.Format("FeatureName: {0}, group: {1}, reading; {2}", reading.FeatureName, reading.FeatureGroup, reading.Data.Name);
+            return "Null reading";
+        }
+
+        internal static void Reset()
 		{
+            Logger.LogDebugMessage("Resetting publisner: clearing queue and removing all subscribers");
 			lock (PublishReadingLock)
 			{
 				Readings = new ConcurrentQueue<Reading>();
@@ -98,6 +111,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 
 		internal static void Process()
 		{
+            Logger.LogDebugMessage("Processing readings");
 			var dataPoints = new List<FeatureStatistics>();
 			Reading reading;
 			while (Readings.TryDequeue(out reading))
@@ -134,6 +148,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 
 		static void NotifySubscribers(IList<FeatureStatistics> dataPoints)
 		{
+            Logger.LogDebugMessage("Notifying Subscribers");
 			if (_initialised == false)
 				return;
 
@@ -146,6 +161,7 @@ namespace Aqueduct.Diagnostics.Monitoring
 				{
 					try
 					{
+                        Logger.LogDebugMessage("Notifying subsriber: " + subscriber.Name);
 						subscriber.ProcessStatistics(dataPoints);
 					}
 					catch (Exception ex)

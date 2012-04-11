@@ -15,8 +15,7 @@ namespace Aqueduct.Diagnostics.Monitoring
         /// </summary>
         public FeatureDescriptor()
         {
-            Name = string.Empty;
-            Group = string.Empty;   
+             
         }
     }
 }

@@ -10,9 +10,7 @@ namespace Aqueduct.Diagnostics.Monitoring.Sensors
 
 		public void Add(double value)
 		{
-			AddReading(new MinReadingData(value) { Name = ReadingName + " - Min" });
-			AddReading(new MaxReadingData(value) { Name = ReadingName + " - Max" });
-			AddReading(new AvgReadingData(value) { Name = ReadingName + " - Avg" });
+			AddReading(new AvgReadingData(value) { Name = ReadingName + " - Avg ms" });
 		}
 	}
 }

@@ -7,28 +7,31 @@ namespace Aqueduct.Diagnostics.Monitoring.MVC
     {
         private System.Diagnostics.Stopwatch _watch = new System.Diagnostics.Stopwatch();
 
-        CountSensor sensor = new CountSensor("Request");
-        TimingSensor timingSensor = new TimingSensor("RequestExecutionTime");
+
+
+        private static string GetReadingName(ControllerBase controller, string actionName)
+        {
+            return controller.GetType().Name + "/" + actionName;
+        }
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            string dataPointName = filterContext.Controller.GetType().Name + "/" + filterContext.ActionDescriptor.ActionName;
-			SensorBase.SetThreadScopedFeatureName(dataPointName);
-
-            sensor.Increment();
+            new CountSensor(GetReadingName(filterContext.Controller, filterContext.ActionDescriptor.ActionName)).Increment();
+            
             _watch.Start();
 
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            
+            _watch.Stop();
+            TimingSensor timingSensor = new TimingSensor(GetReadingName(filterContext.Controller, filterContext.ActionDescriptor.ActionName));
+            timingSensor.Add(_watch.ElapsedMilliseconds);
         }
 
         public void OnResultExecuted(ResultExecutedContext filterContext)
         {
-            _watch.Stop();
-            timingSensor.Add(_watch.ElapsedMilliseconds);
+            
         }
 
         public void OnResultExecuting(ResultExecutingContext filterContext)

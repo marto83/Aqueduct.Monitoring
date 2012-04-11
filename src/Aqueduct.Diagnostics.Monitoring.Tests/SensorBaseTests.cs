@@ -75,13 +75,13 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         }
 
         [Test]
-        public void GetFeatureGroup_WithoutOneSpecified_SetsGroupToBlank()
+        public void GetFeatureGroup_WithoutOneSpecified_SetsGroupToGlobal()
         {
             var sensor = new SensorTestDouble("test", "featureName");
 
             sensor.Add(new Int32ReadingData(1));
 
-            Assert.That(ReadingPublisher.Readings.First().FeatureGroup, Is.EqualTo(string.Empty));
+            Assert.That(ReadingPublisher.Readings.First().FeatureGroup, Is.EqualTo("Global"));
         }
 
         [Test]
@@ -96,13 +96,13 @@ namespace Aqueduct.Diagnostics.Monitoring.Tests
         }
 
         [Test]
-        public void SetThreadScopedFeatureName_WithoutFeatureGroupSpecified_SetsBlankFeatureGroup()
+        public void SetThreadScopedFeatureName_WithoutFeatureGroupSpecified_SetsFeatureGroupToGlobal()
         {
             SensorBase.SetThreadScopedFeatureName("test");
 
             var sensor = new SensorTestDouble("test");
 
-            Assert.That(sensor.GetFeatureNameExposed().Group, Is.EqualTo(string.Empty));
+            Assert.That(sensor.GetFeatureNameExposed().Group, Is.EqualTo("Global"));
         }
 
         [Test]
