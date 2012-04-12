@@ -6,7 +6,7 @@
   <property name="project.type" value="net-4.0"/>
   <property name="Analyse.CodeCoverage" value="false" />
   <property name="validate.javascript.enabled" value="false" />
-  <property name="nuget.svn.path" value="C:\Program Files\VisualSVN\bin\svn.exe" overwrite="false" unless="${property::exists('CCNetLabel')}" />
+  <property name="nuget.use.svn" value="false" />
 
   <include buildfile="C:\Projects\CCNETConfig\common.build" unless="${property::exists('CCNetLabel')}" />
   <include buildfile="D:\Projects\CCNETConfig\common.build" if="${property::exists('CCNetLabel')}" />
