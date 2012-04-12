@@ -63,6 +63,7 @@
     <Compile Include="ServerDensitySettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Aqueduct.ServerDensity.1.0.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

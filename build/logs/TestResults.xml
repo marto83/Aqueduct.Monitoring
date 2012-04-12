@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\projects\Aqueduct.Monitor\src\Aqueduct.Monitoring.Tests\bin\Release\Aqueduct.Monitoring.Tests.dll" total="46" errors="0" failures="0" not-run="1" inconclusive="0" ignored="1" skipped="0" invalid="0" date="2012-04-12" time="15:27:51">
+  <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.5448" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\projects\Aqueduct.Monitor" machine-name="AQUE-PC-44" user="mgeorgiev" user-domain="AQUEDUCT" />
+  <culture-info current-culture="en-GB" current-uiculture="en-US" />
+  <test-suite type="Test Project" name="" executed="True" result="Success" success="True" time="3.084" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="C:\projects\Aqueduct.Monitor\src\Aqueduct.Monitoring.Tests\bin\Release\Aqueduct.Monitoring.Tests.dll" executed="True" result="Success" success="True" time="1.867" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Aqueduct" executed="True" result="Success" success="True" time="1.849" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Monitoring" executed="True" result="Success" success="True" time="1.848" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="1.848" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="AmountSensorTests" executed="True" result="Success" success="True" time="1.457" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.AmountSensorTests.Add_AddsDoubleReadingToNotificationProcessor" executed="True" result="Success" success="True" time="1.443" asserts="2" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="Namespace" name="Aspects" executed="True" result="Success" success="True" time="0.040" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="MonitoredFeatureAspectTests" executed="True" result="Success" success="True" time="0.040" asserts="0">
+                            <results>
+                              <test-case name="Aqueduct.Monitoring.Tests.Aspects.MonitoredFeatureAspectTests.AutomaticallSetsFeatureNameInThreadContextWhenFirstMethodIsExecuted" executed="True" result="Success" success="True" time="0.035" asserts="1" />
+                              <test-case name="Aqueduct.Monitoring.Tests.Aspects.MonitoredFeatureAspectTests.FeatureNameIsRemovedWhenMethodExits" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Aqueduct.Monitoring.Tests.Aspects.MonitoredFeatureAspectTests.FeatureNameIsSetOnlyOncePerClass" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="AvgReadingTests" executed="True" result="Success" success="True" time="0.028" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.AvgReadingTests.Aggregate_ReturnsTheAvegareOfAllAggregatedValues" executed="True" result="Success" success="True" time="0.027" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="CountSensorTests" executed="True" result="Success" success="True" time="0.005" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.CountSensorTests.Increment_AddsNumberReadingToNotificationProcessor" executed="True" result="Success" success="True" time="0.005" asserts="2" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="ExceptionSensorTests" executed="True" result="Success" success="True" time="0.007" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.ExceptionSensorTests.AddException_WithGenericExcetpion_AddTotalExceptionsReadingDataToProcessor" executed="True" result="Success" success="True" time="0.002" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.ExceptionSensorTests.Increment_WithException_AddReadingDataForTheSpecificException" executed="True" result="Success" success="True" time="0.003" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="MaxReadingTests" executed="True" result="Success" success="True" time="0.007" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.MaxReadingTests.Aggregate_ReturnTheMaxOfTwoValues" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="MinReadingTests" executed="True" result="Success" success="True" time="0.007" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.MinReadingTests.Aggregate_ReturnsTheMinOfTwoValues" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="MonitorCountReadingTests" executed="True" result="Success" success="True" time="0.030" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorCountReadingTests.Process_With2ReadingsWithDifferentNames_PassesOnTwoSeparateDataPointsToSubscribers" executed="True" result="Success" success="True" time="0.013" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorCountReadingTests.Process_WithMultipleReadings_CombinesTheReadingsIntoDataPoint" executed="True" result="Success" success="True" time="0.011" asserts="2" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorCountReadingTests.Process_WithMultipleReadings_PassesOnOneDataPointWithCombinedDataToSubscribers" executed="True" result="Success" success="True" time="0.004" asserts="2" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="MonitorDoubleReadingTests" executed="True" result="Success" success="True" time="0.007" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorDoubleReadingTests.Aggregate_AddsUpTheValuesFromTwoDatapoints" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="MonitorTests" executed="True" result="Success" success="True" time="0.196" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Add_AddsReadingToMonitor" executed="True" result="Success" success="True" time="0.002" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Initialise_100MsForProcessTime_StartsATimeThatCallsAfter100ms" executed="False" result="Ignored">
+                            <reason>
+                              <message><![CDATA[Failing test. Rewrite timer implementation to avoid using a real timer during tests.]]></message>
+                            </reason>
+                          </test-case>
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Process_CallsAllSubsribers" executed="True" result="Success" success="True" time="0.002" asserts="2" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Process_ClearsReadingsFromReadingsQueue" executed="True" result="Success" success="True" time="0.002" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Process_WhenASubscriberFailsStillNotifiesTheRestOfTheSubscribers" executed="True" result="Success" success="True" time="0.002" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Process_WithAReading_SendsOneDataPointWithCurrentDate" executed="True" result="Success" success="True" time="0.005" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Process_WithNoReadings_PassesAnEmptyListOfDataPointsToAllSubscribers" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Process_WithTwoReadingsWithSameNameButDifferentReadingDataNames_SendsOneDataPointToSubscribersWithTwoReadingDataValues" executed="True" result="Success" success="True" time="0.002" asserts="3" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Reset_ClearsAllMonitorReadings" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Reset_ClearsAllSubscribers" executed="True" result="Success" success="True" time="0.007" asserts="2" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Shutdown_StopsEnsuresProcessIsNotCalledAgain" executed="True" result="Success" success="True" time="0.154" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.MonitorTests.Subscribe_RegistersSubscribesToTheMonitor" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="SensorBaseTests" executed="True" result="Success" success="True" time="0.022" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.AddReading_WhenNoDataPointNameAvailable_SetsReadingNameTo_Application" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.AddReading_WhenReadingDataNameNotSet_UsesTheSensorReadingName" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.AddReading_WhenReadingDateNameIsSet_UsesTheReadingDataNameInsteadOfSensorReadingName" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.ClearThreadScoredFeatureName_AfterSettingFeatureNameToTest_ReturnsApplication" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.GetFeatureGroup_WithOneSet_SetsCorrectGroupToReading" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.GetFeatureGroup_WithoutOneSpecified_SetsGroupToGlobal" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.GetFeatureName_WhenFeatureNameIsInThreadContext_ReturnsTheOneFromTheThreadContext" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.GetFeatureName_WithFeatureName_SetsFeatureNameForAllReadingsAdded" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.SetThreadScopedFeatureName_WithoutFeatureGroupSpecified_SetsFeatureGroupToGlobal" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.SetThreadScopeFeatureName_WhenFeatureGroupIsSetBothInSensorAndInThreadContext_TheSensorValueIsUsed" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.Monitoring.Tests.SensorBaseTests.SetThreadScopeFeatureName_WithFeatureGroupSpecified_SetsFeatureGroupAccordingly" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="TimingSensorTests" executed="True" result="Success" success="True" time="0.007" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.Monitoring.Tests.TimingSensorTests.Add_CreatesAvgReading" executed="True" result="Success" success="True" time="0.003" asserts="2" />
+                          <test-case name="Aqueduct.Monitoring.Tests.TimingSensorTests.Add_CreatesAvgReadingWithCorrectName" executed="True" result="Success" success="True" time="0.002" asserts="2" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="Assembly" name="C:\projects\Aqueduct.Monitor\src\Aqueduct.ServerDensity.Tests\bin\Release\Aqueduct.ServerDensity.Tests.dll" executed="True" result="Success" success="True" time="1.101" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Aqueduct" executed="True" result="Success" success="True" time="1.083" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="ServerDensity" executed="True" result="Success" success="True" time="1.082" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="1.082" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="ServerDensityAlertsApiTests" executed="True" result="Success" success="True" time="0.654" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.ServerDensity.Tests.ServerDensityAlertsApiTests.GetLast_MakesRequestToCorrectUrl" executed="True" result="Success" success="True" time="0.576" asserts="0" />
+                          <test-case name="Aqueduct.ServerDensity.Tests.ServerDensityAlertsApiTests.LastFive_ReturnsAResult" executed="True" result="Success" success="True" time="0.064" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="ServerDensityApiTest" executed="True" result="Success" success="True" time="0.020" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.ServerDensity.Tests.ServerDensityApiTest.Initialise_WhenAccountIsNotSet_ThrowsException" executed="True" result="Success" success="True" time="0.003" asserts="1" />
+                          <test-case name="Aqueduct.ServerDensity.Tests.ServerDensityApiTest.Initilise_ReturnsIServerDensityApi" executed="True" result="Success" success="True" time="0.003" asserts="2" />
+                          <test-case name="Aqueduct.ServerDensity.Tests.ServerDensityApiTest.Initilise_WhenApiKeyIsNotSpecified_ThrowsException" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.ServerDensity.Tests.ServerDensityApiTest.Initilise_WhenCredentialsNotSet_ThrowsException" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="Aqueduct.ServerDensity.Tests.ServerDensityApiTest.Version_Returns1point4" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="ServerDensityMetricsApiTests" executed="True" result="Success" success="True" time="0.401" asserts="0">
+                        <results>
+                          <test-case name="Aqueduct.ServerDensity.Tests.ServerDensityMetricsApiTests.Postback_CallsSendsaPostRequest" executed="True" result="Success" success="True" time="0.400" asserts="0" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

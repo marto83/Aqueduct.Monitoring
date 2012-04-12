@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <SkipPostSharp>True</SkipPostSharp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,6 +52,9 @@
     <Compile Include="NotificationFilter.cs" />
     <Compile Include="NotificationProcessorInitialiser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Aqueduct.Monitoring.MVC.1.0.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aqueduct.Monitoring\Aqueduct.Monitoring.csproj">

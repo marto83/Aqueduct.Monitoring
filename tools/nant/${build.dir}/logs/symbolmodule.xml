@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<trendcoveragedata>
+  <en>::View::</en>
+  <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="20" ul="13" um="20" usp="15" vbp="25" vl="11" vsp="10" mvc="6" vc="1" vm="25" svc="64" />
+  <doc id="1" om="1" url="\\onyx\C$\CruiseControl.NET\Projects\LloydsLyrisExportScheduler\LDC.Lyris.Business\Domain\LyrisImportReport.cs">
+    <en>\\onyx\C$\CruiseControl.NET\Projects\LloydsLyrisExportScheduler\LDC.Lyris.Business\Domain\LyrisImportReport.cs:1</en>
+    <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="5" ul="7" um="5" usp="9" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0" />
+  </doc>
+  <doc id="2" om="1" url="\\onyx\C$\CruiseControl.NET\Projects\LloydsLyrisExportScheduler\LDC.Lyris.Business\Mail\MailService.cs">
+    <en>\\onyx\C$\CruiseControl.NET\Projects\LloydsLyrisExportScheduler\LDC.Lyris.Business\Mail\MailService.cs:1</en>
+    <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="3" vl="8" vsp="7" mvc="3" vc="1" vm="3" svc="5" />
+  </doc>
+  <doc id="3" om="1" url="\\onyx\C$\CruiseControl.NET\Projects\LloydsLyrisExportScheduler\LDC.Lyris.Business\Mail\SmtpClientProxy.cs">
+    <en>\\onyx\C$\CruiseControl.NET\Projects\LloydsLyrisExportScheduler\LDC.Lyris.Business\Mail\SmtpClientProxy.cs:1</en>
+    <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="2" ul="6" um="2" usp="6" vbp="1" vl="3" vsp="3" mvc="1" vc="1" vm="1" svc="1" />
+  </doc>
+  <doc id="0" om="0" url="||none||">
+    <en>||none||:0</en>
+    <stats acp="95" afp="80" abp="95" acc="20" ccavg="0.0" ccmax="0" ex="0" ei="1" ubp="11" ul="0" um="11" usp="0" vbp="18" vl="0" vsp="0" mvc="6" vc="1" vm="18" svc="0" />
+  </doc>
+  <execution>
+    <driverversion>3.3.2</driverversion>
+    <failed>false</failed>
+    <id>1</id>
+    <trendversion>2.1</trendversion>
+    <measuretime>2010-03-22T14:00:44.1142935+00:00</measuretime>
+    <profilerversion>3.3.2.6211</profilerversion>
+    <projectname>nCover Results</projectname>
+    <starttime>2010-03-22T14:00:41.1658935+00:00</starttime>
+    <satisfactorybranchthreshold>95</satisfactorybranchthreshold>
+    <satisfactorycoveragethreshold>95</satisfactorycoveragethreshold>
+    <satisfactorycyclomaticcomplexitythreshold>20</satisfactorycyclomaticcomplexitythreshold>
+    <satisfactoryfunctionthreshold>80</satisfactoryfunctionthreshold>
+  </execution>
+  <mod>
+    <en>LDC.Lyris.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL</en>
+    <assembly>LDC.Lyris.Business</assembly>
+    <assemblyidentity>LDC.Lyris.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL</assemblyidentity>
+    <modid>1</modid>
+    <path>C:\CruiseControl.NET\Projects\LloydsLyrisExportScheduler\LDC.Lyris.Business.Test\bin\Debug\LDC.Lyris.Business.dll</path>
+    <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="20" ul="13" um="20" usp="15" vbp="25" vl="11" vsp="10" mvc="6" vc="1" vm="25" svc="64">
+      <doc>1</doc>
+      <doc>3</doc>
+      <doc>2</doc>
+      <doc>0</doc>
+    </stats>
+    <ns>
+      <en>LDC.Lyris.Business.Domain</en>
+      <name>LDC.Lyris.Business.Domain</name>
+      <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="18" ul="7" um="18" usp="9" vbp="21" vl="0" vsp="0" mvc="6" vc="1" vm="21" svc="58">
+        <doc>1</doc>
+        <doc>0</doc>
+      </stats>
+      <class>
+        <en>LDC.Lyris.Business.Domain.EmailSetting</en>
+        <name>EmailSetting</name>
+        <signature>LDC.Lyris.Business.Domain.EmailSetting</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="9" vl="0" vsp="0" mvc="3" vc="2" vm="9" svc="23">
+          <doc>0</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="3" vc="3" vm="1" svc="3">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.get_Body() : System.String</en>
+          <name>get_Body</name>
+          <signature>get_Body() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="3" vc="3" vm="1" svc="3">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.get_From() : System.String</en>
+          <name>get_From</name>
+          <signature>get_From() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="3" vc="3" vm="1" svc="3">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.get_Subject() : System.String</en>
+          <name>get_Subject</name>
+          <signature>get_Subject() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="3" vc="3" vm="1" svc="3">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.get_To() : System.String</en>
+          <name>get_To</name>
+          <signature>get_To() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="3" vc="3" vm="1" svc="3">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.set_Body(System.String value) : void</en>
+          <name>set_Body</name>
+          <signature>set_Body(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.set_From(System.String value) : void</en>
+          <name>set_From</name>
+          <signature>set_From(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.set_Subject(System.String value) : void</en>
+          <name>set_Subject</name>
+          <signature>set_Subject(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.EmailSetting.set_To(System.String value) : void</en>
+          <name>set_To</name>
+          <signature>set_To(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+      </class>
+      <class>
+        <en>LDC.Lyris.Business.Domain.ExportDataItem</en>
+        <name>ExportDataItem</name>
+        <signature>LDC.Lyris.Business.Domain.ExportDataItem</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="3" vl="0" vsp="0" mvc="3" vc="1" vm="3" svc="6">
+          <doc>0</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Domain.ExportDataItem.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.ExportDataItem.get_MemberList() : System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.LyrisMember&gt;</en>
+          <name>get_MemberList</name>
+          <signature>get_MemberList() : System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.LyrisMember&gt;</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="3" vc="3" vm="1" svc="3">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.ExportDataItem.set_MemberList(System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.LyrisMember&gt; value) : void</en>
+          <name>set_MemberList</name>
+          <signature>set_MemberList(System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.LyrisMember&gt; value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="1" vc="1" vm="1" svc="1">
+            <doc>0</doc>
+          </stats>
+        </method>
+      </class>
+      <class>
+        <en>LDC.Lyris.Business.Domain.LyrisImportItem</en>
+        <name>LyrisImportItem</name>
+        <signature>LDC.Lyris.Business.Domain.LyrisImportItem</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="5" ul="0" um="5" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+          <doc>0</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportItem.get_ItemId() : System.Guid</en>
+          <name>get_ItemId</name>
+          <signature>get_ItemId() : System.Guid</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportItem.get_Message() : System.String</en>
+          <name>get_Message</name>
+          <signature>get_Message() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportItem.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportItem.set_ItemId(System.Guid value) : void</en>
+          <name>set_ItemId</name>
+          <signature>set_ItemId(System.Guid value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportItem.set_Message(System.String value) : void</en>
+          <name>set_Message</name>
+          <signature>set_Message(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+      </class>
+      <class>
+        <en>LDC.Lyris.Business.Domain.LyrisImportReport</en>
+        <name>LyrisImportReport</name>
+        <signature>LDC.Lyris.Business.Domain.LyrisImportReport</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="5" ul="7" um="5" usp="9" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+          <doc>1</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportReport.get_FailedItems() : System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.LyrisImportItem&gt;</en>
+          <name>get_FailedItems</name>
+          <signature>get_FailedItems() : System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.LyrisImportItem&gt;</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="1" um="1" usp="2" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>1</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportReport.get_ImportedItems() : System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.LyrisImportItem&gt;</en>
+          <name>get_ImportedItems</name>
+          <signature>get_ImportedItems() : System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.LyrisImportItem&gt;</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="1" um="1" usp="2" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>1</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportReport.get_ReportDate() : System.DateTime</en>
+          <name>get_ReportDate</name>
+          <signature>get_ReportDate() : System.DateTime</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>1</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportReport.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="5" um="1" usp="5" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>1</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisImportReport.set_ReportDate(System.DateTime value) : void</en>
+          <name>set_ReportDate</name>
+          <signature>set_ReportDate(System.DateTime value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>1</doc>
+          </stats>
+        </method>
+      </class>
+      <class>
+        <en>LDC.Lyris.Business.Domain.LyrisListSetting</en>
+        <name>LyrisListSetting</name>
+        <signature>LDC.Lyris.Business.Domain.LyrisListSetting</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="3" ul="0" um="3" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+          <doc>0</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisListSetting.get_LyrisListName() : System.String</en>
+          <name>get_LyrisListName</name>
+          <signature>get_LyrisListName() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisListSetting.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisListSetting.set_LyrisListName(System.String value) : void</en>
+          <name>set_LyrisListName</name>
+          <signature>set_LyrisListName(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+      </class>
+      <class>
+        <en>LDC.Lyris.Business.Domain.LyrisMember</en>
+        <name>LyrisMember</name>
+        <signature>LDC.Lyris.Business.Domain.LyrisMember</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="3" ul="0" um="3" usp="0" vbp="6" vl="0" vsp="0" mvc="2" vc="1" vm="6" svc="11">
+          <doc>0</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.get_EmailAddress() : System.String</en>
+          <name>get_EmailAddress</name>
+          <signature>get_EmailAddress() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.get_FullName() : System.String</en>
+          <name>get_FullName</name>
+          <signature>get_FullName() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.get_Preferences() : System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.Preference&gt;</en>
+          <name>get_Preferences</name>
+          <signature>get_Preferences() : System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.Preference&gt;</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="1" vc="1" vm="1" svc="1">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.get_UserId() : System.Guid</en>
+          <name>get_UserId</name>
+          <signature>get_UserId() : System.Guid</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.set_EmailAddress(System.String value) : void</en>
+          <name>set_EmailAddress</name>
+          <signature>set_EmailAddress(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.set_FullName(System.String value) : void</en>
+          <name>set_FullName</name>
+          <signature>set_FullName(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.set_Preferences(System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.Preference&gt; value) : void</en>
+          <name>set_Preferences</name>
+          <signature>set_Preferences(System.Collections.Generic.List&lt;LDC.Lyris.Business.Domain.Preference&gt; value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.LyrisMember.set_UserId(System.Guid value) : void</en>
+          <name>set_UserId</name>
+          <signature>set_UserId(System.Guid value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="2" vc="2" vm="1" svc="2">
+            <doc>0</doc>
+          </stats>
+        </method>
+      </class>
+      <class>
+        <en>LDC.Lyris.Business.Domain.Preference</en>
+        <name>Preference</name>
+        <signature>LDC.Lyris.Business.Domain.Preference</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="2" ul="0" um="2" usp="0" vbp="3" vl="0" vsp="0" mvc="6" vc="6" vm="3" svc="18">
+          <doc>0</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Domain.Preference.get_LocationCode() : System.String</en>
+          <name>get_LocationCode</name>
+          <signature>get_LocationCode() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.Preference.get_OptionCode() : System.String</en>
+          <name>get_OptionCode</name>
+          <signature>get_OptionCode() : System.String</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="0" um="1" usp="0" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.Preference.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="6" vc="6" vm="1" svc="6">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.Preference.set_LocationCode(System.String value) : void</en>
+          <name>set_LocationCode</name>
+          <signature>set_LocationCode(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="6" vc="6" vm="1" svc="6">
+            <doc>0</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Domain.Preference.set_OptionCode(System.String value) : void</en>
+          <name>set_OptionCode</name>
+          <signature>set_OptionCode(System.String value) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="0" vsp="0" mvc="6" vc="6" vm="1" svc="6">
+            <doc>0</doc>
+          </stats>
+        </method>
+      </class>
+    </ns>
+    <ns>
+      <en>LDC.Lyris.Business.Mail</en>
+      <name>LDC.Lyris.Business.Mail</name>
+      <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="2" ul="6" um="2" usp="6" vbp="4" vl="11" vsp="10" mvc="3" vc="1" vm="4" svc="6">
+        <doc>3</doc>
+        <doc>2</doc>
+      </stats>
+      <class>
+        <en>LDC.Lyris.Business.Mail.MailService</en>
+        <name>MailService</name>
+        <signature>LDC.Lyris.Business.Mail.MailService</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="3" vl="8" vsp="7" mvc="3" vc="1" vm="3" svc="5">
+          <doc>3</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Mail.MailService.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="3" vsp="2" mvc="1" vc="1" vm="1" svc="1">
+            <doc>3</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Mail.MailService.ctor(LDC.Lyris.Business.Mail.ISmtpClient smtpClient) : void</en>
+          <name>.ctor</name>
+          <signature>.ctor(LDC.Lyris.Business.Mail.ISmtpClient smtpClient) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="3" vsp="3" mvc="3" vc="3" vm="1" svc="3">
+            <doc>3</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Mail.MailService.SendMail(System.Net.Mail.MailMessage message) : System.Boolean</en>
+          <name>SendMail</name>
+          <signature>SendMail(System.Net.Mail.MailMessage message) : System.Boolean</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="2" vsp="2" mvc="1" vc="1" vm="1" svc="1">
+            <doc>3</doc>
+          </stats>
+        </method>
+      </class>
+      <class>
+        <en>LDC.Lyris.Business.Mail.SmtpClientProxy</en>
+        <name>SmtpClientProxy</name>
+        <signature>LDC.Lyris.Business.Mail.SmtpClientProxy</signature>
+        <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="2" ul="6" um="2" usp="6" vbp="1" vl="3" vsp="3" mvc="1" vc="1" vm="1" svc="1">
+          <doc>2</doc>
+        </stats>
+        <method>
+          <en>LDC.Lyris.Business.Mail.SmtpClientProxy.LDC.Lyris.Business.Mail.ISmtpClient.Send(System.Net.Mail.MailMessage message) : System.Boolean</en>
+          <name>LDC.Lyris.Business.Mail.ISmtpClient.Send</name>
+          <signature>LDC.Lyris.Business.Mail.ISmtpClient.Send(System.Net.Mail.MailMessage message) : System.Boolean</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="3" um="1" usp="3" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>2</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Mail.SmtpClientProxy.ctor() : void</en>
+          <name>.ctor</name>
+          <signature>.ctor() : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="0" ul="0" um="0" usp="0" vbp="1" vl="3" vsp="3" mvc="1" vc="1" vm="1" svc="1">
+            <doc>2</doc>
+          </stats>
+        </method>
+        <method>
+          <en>LDC.Lyris.Business.Mail.SmtpClientProxy.ctor(System.String hostName,System.Int32 port) : void</en>
+          <name>.ctor</name>
+          <signature>.ctor(System.String hostName,System.Int32 port) : void</signature>
+          <stats acp="95" afp="80" abp="95" acc="20" ccavg="1.0" ccmax="1" ex="0" ei="1" ubp="1" ul="3" um="1" usp="3" vbp="0" vl="0" vsp="0" mvc="0" vc="0" vm="0" svc="0">
+            <doc>2</doc>
+          </stats>
+        </method>
+      </class>
+    </ns>
+  </mod>
+  <params name="filterstyle" value="None" />
+  <params name="ishtml" value="0" />
+  <params name="reportinglevel" value="None" />
+  <params name="reportname" value="nCover Results" />
+  <params name="reporttype" value="SymbolModuleNamespaceClassMethod" />
+  <params name="sortstyle" value="Name" />
+  <params name="trendcoveragemetric" value="SymbolCoverage" />
+  <params name="coveragedate" value="22/03/2010" />
+  <params name="coveragetime" value="14:00:41" />
+  <params name="date" value="22/03/2010" />
+  <params name="time" value="14:00:48" />
+</trendcoveragedata>

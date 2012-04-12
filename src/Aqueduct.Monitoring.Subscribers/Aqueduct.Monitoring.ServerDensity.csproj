@@ -8,8 +8,8 @@
     <ProjectGuid>{D3DF3666-43CE-4A5F-9D8F-4215A080CFB8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aqueduct.Monitoring.Subscribers</RootNamespace>
-    <AssemblyName>Aqueduct.Monitoring.Subscribers</AssemblyName>
+    <RootNamespace>Aqueduct.Monitoring.ServerDensity</RootNamespace>
+    <AssemblyName>Aqueduct.Monitoring.ServerDensity</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <SkipPostSharp>True</SkipPostSharp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,7 +51,6 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="LoggingSubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerDensitySubscriber.cs" />
   </ItemGroup>
@@ -65,6 +65,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Aqueduct.Monitoring.ServerDensity.1.0.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Aqueduct.ServerDensity;
 
-namespace Aqueduct.Monitoring.Subscribers
+namespace Aqueduct.Monitoring.ServerDensity
 {
     public class ServerDensitySubscriber
     {
@@ -12,9 +11,7 @@ namespace Aqueduct.Monitoring.Subscribers
         private const string ServerDensityFeatureGroup = "serverdensity";
         private IServerDensityApi _api;
         private readonly string _deviceId;
-        /// <summary>
-        /// Initializes a new instance of the ServerDensitySubscriber class.
-        /// </summary>
+        
         public ServerDensitySubscriber(string deviceId, string agentKey)
         {
             _AgentKey = agentKey;

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Aqueduct.Monitoring.ServerDensity</id>
+    <version>0.0.1.0</version>
+    <title>Aqueduct Monitoring ServerDensity Subscriber</title>
+    <authors>martin</authors>
+    <owners />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Aqueduct monitoring Server density integration</description>
+    <summary />
+    <dependencies>
+      <dependency id="Aqueduct.Monitoring" version="1.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Aqueduct.Monitoring.ServerDensity.dll" target="lib\net40\Aqueduct.Monitoring.ServerDensity.dll" />
+  </files>
+</package>

@@ -145,9 +145,13 @@
       <Project>{4307C470-DAB5-45E9-9DE1-536F213783C7}</Project>
       <Name>Aqueduct.Monitoring.MVC</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Aqueduct.Monitoring.Subscribers\Aqueduct.Monitoring.Subscribers.csproj">
+    <ProjectReference Include="..\Aqueduct.Monitoring.Subscribers\Aqueduct.Monitoring.ServerDensity.csproj">
       <Project>{D3DF3666-43CE-4A5F-9D8F-4215A080CFB8}</Project>
-      <Name>Aqueduct.Monitoring.Subscribers</Name>
+      <Name>Aqueduct.Monitoring.ServerDensity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aqueduct.Monitoring\Aqueduct.Monitoring.csproj">
+      <Project>{247488B0-2551-415F-B68E-205FA66FD061}</Project>
+      <Name>Aqueduct.Monitoring</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

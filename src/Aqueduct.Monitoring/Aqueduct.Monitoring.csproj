@@ -72,8 +72,10 @@
     <Compile Include="Readings\Reading.cs" />
     <Compile Include="Sensors\SensorBase.cs" />
     <Compile Include="Sensors\TimingSensor.cs" />
+    <Compile Include="Subscribers\LoggingSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Aqueduct.Monitoring.1.0.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Aqueduct.Monitoring.MVC;
-using Aqueduct.Monitoring.Subscribers;
+using Aqueduct.Monitoring;
 using Aqueduct.Web;
 using Aqueduct.Web.Configuration;
 using Aqueduct.Diagnostics;
+using Aqueduct.Monitoring.Subscribers;
 
 namespace Aqueduct.Monitoring.SampleMVCSite
 {

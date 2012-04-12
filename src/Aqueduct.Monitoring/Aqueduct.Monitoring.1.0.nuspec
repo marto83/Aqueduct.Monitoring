@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Aqueduct.Monitoring</id>
+    <version>0.0.1.0</version>
+    <title>Aqueduct Monitoring</title>
+    <authors>martin</authors>
+    <owners />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Aqueduct monitoring library</description>
+    <summary />
+    <dependencies>
+      <dependency id="Aqueduct" version="2.0.0.85" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Aqueduct.Monitoring.dll" target="lib\net40\Aqueduct.Monitoring.dll" />
+  </files>
+</package>
