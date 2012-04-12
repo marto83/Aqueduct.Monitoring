@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<project name="AqueductLib" default="nuget-package" xmlns="http://nant.sf.net/release/0.85/nant.xsd">
+  <property name="working.path" value="${project::get-base-directory()}"/>
+  <property name="project.name" value="AqueductLib"/>
+  <property name="solution.path" value="Aqueduct.sln" />
+  <property name="project.type" value="net-4.0"/>
+  <property name="Analyse.CodeCoverage" value="false" />
+  <property name="validate.javascript.enabled" value="false" />
+  <property name="source.path" value="${working.path}" />
+  <property name="nuget.svn.path" value="C:\Program Files\VisualSVN\bin\svn.exe" overwrite="false" unless="${property::exists('CCNetLabel')}" />
+
+  <include buildfile="C:\Projects\CCNETConfig\common.build" unless="${property::exists('CCNetLabel')}" />
+  <include buildfile="D:\Projects\CCNETConfig\common.build" if="${property::exists('CCNetLabel')}" />
+
+  
+  <property name="project.configuration" value="Release" />
+
+  <if test="${not(property::exists('CCNetLabel'))}">
+    <property name="nuget.package.path" value="${build.path}\package" />
+    <mkdir dir="${nuget.package.path}" unless="${directory::exists(nuget.package.path)}" />
+
+    <echo message="in here: ${nuget.package.path}" />
+  </if>
+</project>

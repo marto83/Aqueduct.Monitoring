@@ -1,0 +1,603 @@
+<?xml version="1.0"?>
+
+<project name="Common Utils" xmlns="http://nant.sf.net/release/0.85/nant.xsd">
+
+  <!-- Requires all NAnt Contrib dlls to be copied with the core dlls -->
+
+  <!-- Currently net-1.0, net-1.1, net-2.0, php, php-4, php-5, php-6, java, symfony, asp-3.0, design, cuyahoga, cuyahoga-no-solution, html -->
+  <property name="project.type" value="${framework::get-target-framework()}" overwrite="false"/>
+  
+  <!-- Currently single, multi -->
+  <property name="package.type" value="single" overwrite="false"/>
+  
+  <!-- Currently single, multi -->
+  <property name="web.virtualdirectory" value="${package.name}" overwrite="false"/>
+
+  <!-- Derive the working directory -->
+  <property  name="working.path" value="C:\CruiseControl.NET\Projects\${package.name}" overwrite="false"/>
+    <!-- full paths -->
+
+
+  <!-- Location of output files, logs etc -->
+  <!-- NOTE: build.path is deprecated -->
+  <property if="${property::exists('build.path')}" name="artifact.path" value="${build.path}" overwrite="false"/>
+  <if test="${not property::exists('build.path')}">
+    <property if="${property::exists('CCNetArtifactDirectory')}" name="artifact.path" value="${CCNetArtifactDirectory}" overwrite="false"/>
+    <property if="${not property::exists('CCNetArtifactDirectory')}" name="artifact.path" value="${basedir}/build" overwrite="false"/>
+  </if>
+
+
+  <!-- Standard source paths -->
+  <property name="versions.path" value="${artifact.path}/versions" overwrite="false"/>
+  <property name="current.path" value="${artifact.path}/current" overwrite="false"/>
+  <property name="log.path" value="${artifact.path}/log" overwrite="false" />
+
+  <!-- Labels for build variants -->
+  <property name="development.label" value="development" overwrite="false"/>
+  <property name="staging.label" value="staging" overwrite="false"/>
+  <property name="live.label" value="live" overwrite="false"/>
+  <property name="universal.label" value="universal" overwrite="false"/>
+
+  <!-- Output paths for build variants -->
+  <property name="development.path" value="${current.path}/${development.label}" overwrite="false"/>
+  <property name="staging.path" value="${current.path}/${staging.label}" overwrite="false"/>
+  <property name="live.path" value="${current.path}/${live.label}" overwrite="false"/>
+  
+  <!-- Setup for version file -->
+  <property name="create-version-file.destination.path" value="${current.path}"/>
+  <property name="create-version-file.build.type" value="${universal.label}"/>
+
+  <property name="msbuild.workingdir" value="${working.path}" overwrite="false"/>
+  <property name="msbuild.configuration" value="Release" overwrite="false"/>
+  <property name="ant.workingdir" value="${working.path}" overwrite="false"/>
+  <property name="test.assembly" value="${package.name}.Test" overwrite="false"/>
+  <property name="project.lib.path" value="${working.path}/lib" overwrite="false"/>
+
+
+  <!-- Derive the root of source files -->
+  <property if="${property::exists('src.path')}" name="code.source.path" value="${src.path}" overwrite="false"/>
+  <property if="${not property::exists('code.source.path')}" name="code.source.path" value="${working.path}/src" overwrite="false"/>
+  <property name="test.source.path" value="${code.source.path}/Test" overwrite="false"/>
+
+  <property name="fxcop.config" value="${package.name}.FxCop" overwrite="false"/>
+
+  <!-- Paths of helper applications -->
+  <property name="fxcop.path" value="C:\Program Files\Microsoft FxCop 1.35" overwrite="false"/>
+  <property name="msbuild.path" value="C:\WINDOWS\Microsoft.NET\Framework\v3.5" overwrite="false"/>
+  <property name="nunit.path" value="C:\Program Files\NUnit 2.4.6\bin" overwrite="false"/>
+  <property name="nunit.path.net-1.1" value="C:\Program Files\NUnit 2.4.6 net-1.1\bin" overwrite="false"/>
+  <property name="clean.path" value="${current.path}" overwrite="false"/>
+  <property name="svn.path" value="C:\Program Files\Subversion\bin" overwrite="false"/>
+  <property name="tortoisesvn.path" value="C:\Program Files\TortoiseSVN\bin" overwrite="false"/>
+  <property name="yuicompressor.path" value="C:\Program Files\YUI Compressor\bin" overwrite="false"/>
+  <property name="pngcrush.path" value="C:\Program Files\Pngcrush" overwrite="false"/>
+
+  <!-- Source directory from which a package is created -->
+  <if test="${not property::exists('package.source.path')}">
+    <property if="${property::exists('web.path')}" name="package.source.path" value="${web.path}" overwrite="false"/>
+    <property if="${project.type == 'design'}" name="package.source.path" value="${design.source.path}" overwrite="false"/>
+    <property if="${not property::exists('web.path')}" name="package.source.path" value="${working.path}/Web" overwrite="false"/>
+  </if>
+
+  <!-- Set to true to copy all dlls from lib folder into the web bin folder -->
+  <property name="copy-web-files-fn.copy.lib" value="true" overwrite="false"/>
+
+
+  <!-- Generic targets -->
+  <target name="clean" description="remove all generated files">
+
+    <if test="${string::starts-with(project.type, 'java')}">
+      <property name="ant.target" value="clean"/>
+      <call target="ant" failonerror="false"/>
+    </if>
+
+    <delete failonerror="false">
+      <fileset basedir="${clean.path}">
+        <include name="**/*" />
+        <exclude name="**/changes.xml" />
+      </fileset>
+    </delete>
+
+    <mkdir dir="${clean.path}" failonerror="false" />
+
+    <delete dir="${development.path}" failonerror="false" />
+    <delete dir="${staging.path}" failonerror="false" />
+    <delete dir="${live.path}" failonerror="false" />
+  </target>
+
+  <target name="compile" depends="clean">
+    
+    <call if="${target::exists('pre-compile')}" target="pre-compile" />
+    
+    <call if="${project.type == 'net-2.0'}" target="msbuild"/>
+    <call if="${project.type == 'net-1.0' or project.type == 'net-1.1'}" target="solution-compile"/>    
+    <call if="${target::exists('post-compile')}" target="post-compile" />
+
+  </target>
+
+  <target name="analyse" depends="compile">
+
+    <call if="${target::exists('pre-analyse')}" target="pre-analyse" />
+
+    <call if="${string::starts-with(project.type, 'net') or project.type == 'cuyahoga'}" target="analyse-net"/>
+
+    <call if="${target::exists('post-analyse')}" target="post-analyse" />
+
+  </target>
+
+  <target name="test" depends="compile">
+
+    <call if="${target::exists('pre-test')}" target="pre-test" />
+
+    <call if="${string::starts-with(project.type, 'net') or project.type == 'cuyahoga'}" target="test-net"/>
+    <call if="${string::starts-with(project.type, 'php')}" target="test-php"/>
+
+    <call if="${target::exists('post-test')}" target="post-test" />
+
+  </target>
+
+  <!-- new official name -->
+  <target name="build" depends="package" />
+  
+  <!-- legacy name for build -->
+  <target name="package" depends="compile,analyse,test">
+
+    <call if="${target::exists('pre-build')}" target="pre-build" />
+    
+    <!-- legacy target -->
+    <call if="${target::exists('pre-package')}" target="pre-package" />
+
+    <if test="${string::starts-with(project.type, 'java')}">
+      <property name="ant.target" value="build"/>
+      <call target="ant" />
+    </if>
+
+    <call if="${package.type == 'multi'}" target="package-multi"/>
+    <call unless="${package.type == 'multi'}" target="package-single"/>
+
+    <call if="${target::exists('post-build')}" target="post-build" />
+
+    <!-- legacy target -->
+    <call if="${target::exists('post-package')}" target="post-package" />
+    
+
+  </target>
+  
+  <!-- A lot of these targets depend upon the package name being the same as the core assembly name -->
+
+  <!-- compile current project with MSBuild -->
+  	<property name="tempSolutionName" value="${package.name}"/>
+  <target name="msbuild">
+    <if test="${property::exists('solutionName')}" >
+  	<property name="tempSolutionName" value="${solutionName}"/>
+    </if>
+
+    <echo message="Compiling ${msbuild.workingdir}\${tempSolutionName}.sln"/>
+    <exec program="msbuild.exe" basedir="${msbuild.path}" workingdir="${msbuild.workingdir}">
+      <arg value="/p:Configuration=${msbuild.configuration}" />
+      <arg value="/noconsolelogger" />
+      <arg value="/v:normal" />
+      <arg value="/logger:${lib.nant.path}/loggers/Rodemeyer.MsBuildToCCnet.dll"/>
+      <arg value="/t:rebuild"/>
+      <arg value="${tempSolutionName}.sln"/>
+    </exec>
+    <property name="msbuild.output.file" value="${msbuild.workingdir}/msbuild-output.xml"/>
+    <move if="${file::exists(msbuild.output.file)}" file="${msbuild.output.file}" todir="${log.path}" failonerror="false" overwrite="true" />
+  </target>
+
+  <target name="msbuild-verbose">
+   <if test="${property::exists('solutionName')}" >
+    	<property name="tempSolutionName" value="${solutionName}"/>
+    </if>
+    <echo message="Compiling ${msbuild.workingdir}\${package.name}.sln"/>
+    <exec program="msbuild.exe" basedir="${msbuild.path}" workingdir="${msbuild.workingdir}">
+      <arg value="/p:Configuration=${msbuild.configuration}" />
+      <arg value="/v:normal" />
+      <arg value="/t:rebuild"/>
+      <arg value="${package.name}.sln"/>
+    </exec>
+  </target>
+
+  <!-- Build .NET 1.0 and .NET 1.1 projects -->
+  <target name="solution-compile" description="Compile .NET 1 code">
+    <property name="solution.web.project.path" value="${working.path}/Web/${package.name}.Web.csproj" overwrite="false"/>
+    <solution configuration="release" outputdir="${package.source.path}/bin" solutionfile="${package.name}.sln">
+      <webmap>
+        <map url="http://localhost/${web.virtualdirectory}/${package.name}.Web.csproj" path="${solution.web.project.path}" />
+      </webmap>
+      <assemblyfolders>
+        <include name="${project.lib.path}"/>
+      </assemblyfolders>
+    </solution>
+  </target>
+
+  
+ 
+  
+  <!-- Perform default .NET testing -->
+  <target name="test-net">
+    
+    <property name="test.project.file.name" value="${test.source.path}\${package.name}.nunit"/>
+
+    <mkdir dir="${log.path}" failonerror="false"/>
+    
+    <if test="${file::exists(test.project.file.name)}">
+      <trycatch>
+        <try>
+          <copy file="${test.source.path}\App.Config" tofile="${test.source.path}\${package.name}.config" />
+          <property unless="${project.type == 'net-2.0'}" name="test-net.nunit.path" value="${nunit.path.net-1.1}"/>
+          <exec program="nunit-console.exe" basedir="${test-net.nunit.path}" workingdir="${working.path}">
+            <arg value="${test.project.file.name}" />
+            <arg value="/xml=${log.path}\nunit-output.xml" />
+            <arg value="/noshadow" />
+            <arg value="/config=${test.source.path}\${package.name}.config" />
+          </exec>
+        </try>
+      </trycatch>
+    </if>
+  </target>
+
+
+<target name="deploy-to-dev">
+	<if test="${property::exists('devserver.path')}" >
+		<copy todir="${devserver.path}" overwrite="true" verbose="true">
+		    <fileset basedir="${development.path}">
+			<include name="**"></include>
+		  </fileset>
+		</copy>
+	</if>
+</target>
+  
+
+  <!-- FxCop -->
+  <target name="analyse-net">
+    <property name="fxcop.file.name" value="${working.path}\${fxcop.config}"/>
+    <mkdir dir="${log.path}" failonerror="false"/>
+    <exec if="${file::exists(fxcop.file.name)}" program="fxcopcmd.exe" basedir="${fxcop.path}" failonerror="false" workingdir="${working.path}">
+        <arg value="/p:${fxcop.file.name}"/>
+      <arg value="/o:${log.path}\fxcop.xml" />
+    </exec>
+  </target>
+
+  <target name="package-single" depends="copy-package-source-single,package-single-fn" />
+
+  <target name="package-single-fn">
+
+    <!-- Create versioning and distribution -->
+    <if test="${property::exists('CCNetLabel')}">
+      <call target="create-version-file" />
+      <mkdir dir="${versions.path}" /> 
+      <zip zipfile="${versions.path}\${package.name}-V${CCNetLabel}.zip">
+        <fileset basedir="${current.path}">
+          <include name="**/*" />
+        </fileset>
+      </zip>
+    </if>
+
+  </target>
+
+  <!-- Changes build-type specific files -->
+  <target name="change-config-files">
+
+    <!-- Development -->
+    <property name="remove-file-extensions-fn.extension" value="${development.label}"/>
+    <property name="remove-file-extensions-fn.path" value="${development.path}"/>
+    <call target="remove-file-extensions-fn" />
+
+    <!-- Staging -->
+    <property name="remove-file-extensions-fn.extension" value="${staging.label}"/>
+    <property name="remove-file-extensions-fn.path" value="${staging.path}"/>
+    <call target="remove-file-extensions-fn" />
+    
+    <!-- Live -->
+    <property name="remove-file-extensions-fn.extension" value="${live.label}"/>
+    <property name="remove-file-extensions-fn.path" value="${live.path}"/>
+    <call target="remove-file-extensions-fn" />
+
+    <property name="delete-config-file-variations.path" value="${current.path}"/>
+    <call target="delete-config-file-variations"/>
+
+  </target>
+
+  <target name="delete-config-file-variations">
+    <!-- Clear out other config files -->
+    <delete failonerror="false">
+      <fileset basedir="${delete-config-file-variations.path}">
+        <include name="**/*.${live.label}"/>
+        <include name="**/*.${staging.label}"/>
+        <include name="**/*.${development.label}"/>
+        <include name="**/*.release"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <!-- creates development, staging and live variations -->
+  <target name="package-multi" depends="copy-package-source-multi,change-config-files,package-versions" />
+
+  <!-- Copies files from the web directory to the relevant distributions -->  
+  <target name="copy-package-source-multi" depends="create-version-file">
+
+    <!-- development -->
+    <property name="copy-package-source-fn.destination.path" value="${development.path}"/>
+    <call target="copy-package-source-fn"/>
+    
+    <property name="create-version-file.build.type" value="${development.label}"/>
+    <property name="create-version-file.destination.path" value="${development.path}"/>
+    <call target="create-version-file" />
+
+    <!-- staging -->
+    <property name="copy-package-source-fn.destination.path" value="${staging.path}"/>
+    <call target="copy-package-source-fn"/>
+
+    <property name="create-version-file.build.type" value="${staging.label}"/>
+    <property name="create-version-file.destination.path" value="${staging.path}"/>
+    <call target="create-version-file" />
+   
+    
+    <!-- live -->
+    <property name="copy-package-source-fn.destination.path" value="${live.path}"/>
+    <call target="copy-package-source-fn"/>
+
+    <property name="create-version-file.build.type" value="${live.label}"/>
+    <property name="create-version-file.destination.path" value="${live.path}"/>
+    <call target="create-version-file" />
+
+  </target>
+  
+  <target name="package-versions">
+    <if test="${property::exists('CCNetLabel')}">
+      <mkdir dir="${versions.path}" />
+      <zip zipfile="${versions.path}\${package.name}-${development.label}-V${CCNetLabel}.zip">
+        <fileset basedir="${development.path}">
+          <include name="**/*" />
+        </fileset>
+      </zip>
+      <call target="deploy-to-dev"/>
+      <zip zipfile="${versions.path}\${package.name}-${staging.label}-V${CCNetLabel}.zip">
+        <fileset basedir="${staging.path}">
+          <include name="**/*" />
+        </fileset>
+      </zip>
+      <zip zipfile="${versions.path}\${package.name}-${live.label}-V${CCNetLabel}.zip">
+        <fileset basedir="${live.path}">
+          <include name="**/*" />
+        </fileset>
+      </zip>
+    </if>
+  </target>
+
+  <target name="create-version-file">
+    <if test="${property::exists('CCNetLabel')}">
+      
+      <!--<copy todir="${create-version-file.destination.path}" overwrite="true">
+        <fileset basedir="${lib.template.path}">
+          <include name="version.html" />
+        </fileset>
+        <filterchain>
+          <replacetokens>
+            <token key="BUILD_DATE" value="${CCNetBuildDate}" />
+          </replacetokens>
+          <replacetokens>
+            <token key="BUILD_TIME" value="${CCNetBuildTime}" />
+          </replacetokens>
+          <replacetokens>
+            <token key="BUILD_NUMBER" value="${CCNetLabel}" />
+          </replacetokens>
+          <replacetokens>
+            <token key="BUILD_TYPE" value="${create-version-file.build.type}" />
+          </replacetokens>
+          <replacetokens>
+            <token key="TITLE" value="${CCNetProject}" />
+          </replacetokens>
+        </filterchain>
+      </copy> -->
+    </if>
+  </target>
+
+  <target name="copy-package-source-single">
+	  <property name="copy-package-source-fn.destination.path" value="${current.path}"/>
+	  <call target="copy-package-source-fn"/>
+  </target>
+  
+  <target name="copy-package-source-fn">
+    <property name="copy-web-files-fn.source.path" value="${package.source.path}"/>
+    <property name="copy-web-files-fn.destination.path" value="${copy-package-source-fn.destination.path}"/>
+    <call target="copy-web-files-fn"/>
+
+    <!-- Option to change source contents before any packaging is done -->
+    <property name="post-source-copy.destination.path" value="${copy-package-source-fn.destination.path}"/>
+    <call if="${target::exists('post-source-copy')}" target="post-source-copy"/>
+    
+    <!-- Might want to pack all javascript in this project -->
+    <call if="${property::exists('auto-pack-javascript-all') and auto-pack-javascript-all}" target="pack-javascript-all"/>
+
+    <!-- Might want to pack all css files in this project -->
+    <call if="${property::exists('auto-pack-css-all') and auto-pack-css-all}" target="pack-css-all"/>
+
+    <!-- Might want to pack all png files in this project -->
+    <call if="${property::exists('auto-pack-png-all') and auto-pack-png-all}" target="pack-png-all"/>
+
+  </target>
+
+  <target name="copy-web-files-fn">
+    <property name="copy-web-files-fn.overwrite" unless="${property::exists('copy-web-files-fn.overwrite')}" value="false"/>
+    <copy todir="${copy-web-files-fn.destination.path}" includeemptydirs="false" overwrite="${copy-web-files-fn.overwrite}">
+      <fileset basedir="${copy-web-files-fn.source.path}">
+        <include name="**/*"/>
+        <exclude unless="${msbuild.configuration == 'Debug'}" name="**/*.pdb"/>
+        <exclude name="**/*.cs"/>
+        <exclude name="**/*.csproj"/>
+        <exclude name="**/*.csproj.webinfo"/>
+        <exclude name="**/*.scc"/>
+        <exclude name="**/*.vspscc"/>
+        <exclude name="obj/**"/>
+        <exclude name="web.config"/>
+        <exclude name="log4net.config"/>
+        <exclude name="build.ver"/>
+        <exclude name="**/_svn"/>
+        <exclude name="**/.svn"/>
+        <exclude name="**/CVS"/>
+        <exclude name="**/*.log"/>
+        <exclude name="**/*~"/>
+        <exclude name="**/*.exclude"/>
+        <exclude name="**/*.user"/>
+        <exclude name="Properties"/>
+        <exclude name="Thumbs.db"/>
+        <exclude name="**/*.as?x.resx"/>
+        <exclude name="**/SQLUpdates/*" />
+	      <exclude name="**/_sql_updates/*" />
+	      <exclude name="**/*.build" />
+	      <exclude name="**/dwsync.xml" />
+      </fileset>
+    </copy>
+    <copy todir="${copy-web-files-fn.destination.path}">
+      <fileset basedir="${copy-web-files-fn.source.path}">
+        <include name="**/App_Code/*.cs"/>
+        <include name="**/App_Code/*.vb"/>
+      </fileset>
+    </copy>
+    <copy if="${copy-web-files-fn.copy.lib}" todir="${copy-web-files-fn.destination.path}/bin">
+      <fileset basedir="${project.lib.path}">
+        <include name="**/*.dll"/>
+        <include name="**/*.lic"/>
+      </fileset>
+    </copy>
+  </target>
+
+
+  <!-- rename all files ending in -->
+  <target name="remove-file-extensions-fn">
+    <foreach item="File" property="filename">
+      <in>
+        <items>
+          <include name="${remove-file-extensions-fn.path}\**\*.${remove-file-extensions-fn.extension}" />
+        </items>
+      </in>
+      <do>
+        <property name="remove-file-extensions-fn.destination.filename" value="${string::substring(filename, 0, string::get-length(filename) - string::get-length(remove-file-extensions-fn.extension) - 1)}" />
+        <move overwrite="true" file="${filename}" tofile="${remove-file-extensions-fn.destination.filename}" />
+      </do>
+    </foreach>
+  </target>
+  
+  <!-- SVN Export -->
+  <target name="svn-export">
+    <property name="svn-export.destination.path" value="${working.path}" overwrite="false"/>
+    <mkdir dir="${svn-export.destination.path}" failonerror="false"/>
+    <exec program="svn" basedir="${svn.path}" workingdir="${svn-export.destination.path}">
+      <arg value="export" />
+      <arg value="${svn-export.repository.path}" />
+      <arg value="." />
+      <arg value="--force" />
+    </exec>
+  </target>
+
+  <!-- SVN Checkout -->
+  <target name="svn-checkout">
+    <property name="svn-checkout.destination.path" value="${working.path}" overwrite="false"/>
+    <mkdir dir="${svn-checkout.destination.path}" failonerror="false"/>
+    <exec program="TortoiseProc.exe" basedir="${tortoisesvn.path}" workingdir="${svn-checkout.destination.path}">
+      <arg value="/command:checkout" />
+      <arg value="/path:${svn-checkout.destination.path}" />
+      <arg value="/url:${svn-checkout.repository.path}" />
+    </exec>
+  </target>
+
+  <!-- SVN Update -->
+  <target name="svn-update">
+    <property name="svn-update.destination.path" value="${working.path}" overwrite="false"/>
+    <exec program="TortoiseProc.exe" basedir="${tortoisesvn.path}" workingdir="${svn-update.destination.path}">
+      <arg value="/command:update" />
+      <arg value="/path:${svn-update.repository.path}" />
+    </exec>    
+  </target>
+
+  <target name="pack-javascript">
+    <echo message="Packing ${pack-javascript.filename}"/>
+    <exec program="java.exe" workingdir="${yuicompressor.path}" >
+      <arg value="-jar"/>
+      <arg value="yuicompressor-2.4.2.jar" />
+      <arg value="--type" />
+      <arg value="js" />
+      <arg value="--charset" />
+      <arg value="utf-8" />
+      <arg value="-o" />
+      <arg value="${pack-javascript.filename}" />
+      <arg value="${pack-javascript.filename}" />
+    </exec>
+  </target>
+
+  <target name="pack-css">
+    <echo message="Packing ${pack-css.filename}"/>
+    <exec program="java.exe" workingdir="${yuicompressor.path}" >
+      <arg value="-jar"/>
+      <arg value="yuicompressor-2.4.2.jar" />
+      <arg value="--type" />
+      <arg value="css" />
+      <arg value="--charset" />
+      <arg value="utf-8" />
+      <arg value="-o" />
+      <arg value="${pack-css.filename}" />
+      <arg value="${pack-css.filename}" />
+    </exec>
+  </target>
+
+  <target name="pack-javascript-all">
+    <property name="pack-javascript-all.path" value="${current.path}" overwrite="false"/>
+    <foreach item="File" property="filename">
+      <in>
+        <items>
+          <include name="${pack-javascript-all.path}\**\*.js" />
+        </items>
+      </in>
+      <do>
+        <property name="pack-javascript.filename" value="${filename}" />
+        <call target="pack-javascript"/>
+      </do>
+    </foreach>
+  </target>
+
+  <target name="pack-css-all">
+    <property name="pack-css-all.path" value="${current.path}" overwrite="false"/>
+    <foreach item="File" property="filename">
+      <in>
+        <items>
+          <include name="${pack-css-all.path}\**\*.css" />
+        </items>
+      </in>
+      <do>
+        <property name="pack-css.filename" value="${filename}" />
+        <call target="pack-css"/>
+      </do>
+    </foreach>
+  </target>
+
+  <target name="pack-png">
+    <echo message="Compressing ${pack-png.filename}"/>
+    <exec program="pngcrush.exe" verbose="true" basedir="${pngcrush.path}" >
+      <arg value="-reduce"/>
+      <arg value="-brute" />
+      <arg value="-l" />
+      <arg value="9" />
+      <arg value="${pack-png.filename}" />
+      <arg value="${pack-png.filename}.pak" />
+    </exec>
+    <move overwrite="true" file="${pack-png.filename}.pak" tofile="${pack-png.filename}" />
+  </target>
+
+  <target name="pack-png-all">
+    <property name="pack-png-all.path" value="${current.path}" overwrite="false"/>
+    <foreach item="File" property="filename">
+      <in>
+        <items>
+          <include name="${pack-png-all.path}\**\*.png" />
+        </items>
+      </in>
+      <do>
+        <property name="pack-png.filename" value="${filename}" />
+        <call target="pack-png"/>
+      </do>
+    </foreach>
+  </target>
+
+</project>

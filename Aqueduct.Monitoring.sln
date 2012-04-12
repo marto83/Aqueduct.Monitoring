@@ -1,19 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring", "Aqueduct.Monitoring\Aqueduct.Monitoring.csproj", "{247488B0-2551-415F-B68E-205FA66FD061}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring", "src\Aqueduct.Monitoring\Aqueduct.Monitoring.csproj", "{247488B0-2551-415F-B68E-205FA66FD061}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.Tests", "Aqueduct.Monitoring.Tests\Aqueduct.Monitoring.Tests.csproj", "{B1B8C95B-5793-402C-9940-C1D220F7C56E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.Tests", "src\Aqueduct.Monitoring.Tests\Aqueduct.Monitoring.Tests.csproj", "{B1B8C95B-5793-402C-9940-C1D220F7C56E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.SampleMVCSite", "Aqueduct.Monitoring.SampleMVCSite\Aqueduct.Monitoring.SampleMVCSite.csproj", "{BD3A25ED-E7C9-45DD-A802-D520F585C078}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.SampleMVCSite", "src\Aqueduct.Monitoring.SampleMVCSite\Aqueduct.Monitoring.SampleMVCSite.csproj", "{BD3A25ED-E7C9-45DD-A802-D520F585C078}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.MVC", "Aqueduct.Monitoring.MVC\Aqueduct.Monitoring.MVC.csproj", "{4307C470-DAB5-45E9-9DE1-536F213783C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.MVC", "src\Aqueduct.Monitoring.MVC\Aqueduct.Monitoring.MVC.csproj", "{4307C470-DAB5-45E9-9DE1-536F213783C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.Subscribers", "Aqueduct.Monitoring.Subscribers\Aqueduct.Monitoring.Subscribers.csproj", "{D3DF3666-43CE-4A5F-9D8F-4215A080CFB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.Subscribers", "src\Aqueduct.Monitoring.Subscribers\Aqueduct.Monitoring.Subscribers.csproj", "{D3DF3666-43CE-4A5F-9D8F-4215A080CFB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.ServerDensity", "Aqueduct.ServerDensity\Aqueduct.ServerDensity.csproj", "{8D620CCB-B482-4D1F-A97F-D71C4935161F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.ServerDensity", "src\Aqueduct.ServerDensity\Aqueduct.ServerDensity.csproj", "{8D620CCB-B482-4D1F-A97F-D71C4935161F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.ServerDensity.Tests", "Aqueduct.ServerDensity.Tests\Aqueduct.ServerDensity.Tests.csproj", "{FA76AF89-A05D-4A02-AEE6-FB6378684C25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.ServerDensity.Tests", "src\Aqueduct.ServerDensity.Tests\Aqueduct.ServerDensity.Tests.csproj", "{FA76AF89-A05D-4A02-AEE6-FB6378684C25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{1B4A32E1-7357-4831-BE9E-A0217D6537F0}"
+	ProjectSection(SolutionItems) = preProject
+		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

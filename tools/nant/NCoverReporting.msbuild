@@ -1,0 +1,28 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ToolsDir></ToolsDir>
+    <BuildDir></BuildDir>
+    <CoverageDir></CoverageDir>
+    <Reports>
+      <Report>
+        <!--<ReportType>SymbolModule</ReportType>-->
+        <ReportType>SymbolModuleNamespaceClassMethod</ReportType>
+        <Format>Xml</Format>
+        <OutputPath>$(BuildDir)\logs\symbolmodule.xml</OutputPath>
+      </Report>
+    </Reports>
+  </PropertyGroup>
+  <UsingTask TaskName="NCover.MSBuildTasks.NCoverReporting"
+                AssemblyFile="C:\CruiseControl.NET\server\Tools\nant\msbuildTasks\NCover.MSBuildTasks.dll"/>
+
+  <Target Name="CreateCoverageReports">
+
+<Message Text="builddir: $(BuildDir)" />
+<Message Text="Coverdir: $(CoverageDir)" />
+
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+        CoverageDataPaths="$(CoverageDir)\*.xml"
+        OutputReport="$(Reports)"
+    />
+  </Target>
+</Project>

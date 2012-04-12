@@ -1,0 +1,3 @@
+tools\nant\nant 
+
+pause
