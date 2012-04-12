@@ -67,7 +67,7 @@ namespace Aqueduct.ServerDensity.Tests
         public void LastFive_ReturnsAResult()
         {
             var api = GetApi();
-
+            RequestClientMock.Setup(x => x.Get(It.IsAny<string>())).Returns("result");
             Assert.That(api.Alerts.GetLast(), Is.Not.Null) ;
         }
 
