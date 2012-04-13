@@ -41,7 +41,7 @@ namespace Aqueduct.ServerDensity
             if (string.IsNullOrEmpty(settings.Account))
                 throw new ArgumentException("Account missing. Account is required to initialise API. It will be in the form of [name].serverdensity.com");
 
-            return new ServerDensityApi(settings) { RequestClient = requestClient ?? new RequestClient() };
+            return new ServerDensityApi(settings) { RequestClient = requestClient ?? new RequestClient(settings.Credentials) };
         }
 
         internal string CallUrl(string module, string method)

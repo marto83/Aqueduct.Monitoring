@@ -9,27 +9,17 @@ namespace Aqueduct.ServerDensity
 {
     public class RequestClient : IRequestClient
     {
+        private readonly NetworkCredential _creadentials;
         readonly static ILogger Logger = AppLogger.GetNamedLogger(typeof(ServerDensityApi));
 
-        private readonly string _username;
-        private readonly string _password;
-        public RequestClient(string username, string password)
+        public RequestClient(NetworkCredential creadentials)
         {
-            _password = password;
-            _username = username;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the RequestClient class.
-        /// </summary>
-        public RequestClient()
-        {
-            
+            _creadentials = creadentials;            
         }
 
         private WebClient Create()
         {
-            WebClient client = new WebClient() { Credentials = new NetworkCredential(_username, _password) };
+            WebClient client = new WebClient() { Credentials = _creadentials };
             client.Headers["User-Agent"] = "Aqueduct stat uploader";
             return client;
         }
