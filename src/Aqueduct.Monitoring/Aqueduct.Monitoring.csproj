@@ -75,7 +75,9 @@
     <Compile Include="Subscribers\LoggingSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Aqueduct.Monitoring.1.0.nuspec" />
+    <None Include="Aqueduct.Monitoring.1.0.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
