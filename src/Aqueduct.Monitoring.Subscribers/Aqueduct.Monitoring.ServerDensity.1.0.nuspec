@@ -11,6 +11,7 @@
     <summary />
     <dependencies>
       <dependency id="Aqueduct.Monitoring" version="1.0.0.0" />
+      <dependency id="Aqueduct.ServerDensity" version="1.0.0.0" />
     </dependencies>
   </metadata>
   <files>
