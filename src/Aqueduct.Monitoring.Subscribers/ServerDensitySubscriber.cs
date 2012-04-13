@@ -30,9 +30,11 @@ namespace Aqueduct.Monitoring.ServerDensity
         {
             Logger.LogDebugMessage("Creating ServerDensity payload");
             var payload = new MetricsPayload() { AgentKey = _AgentKey };
-
+            bool hasData = false;
             foreach (var featureStat in stats.Where(x => x.Group == ServerDensityFeatureGroup))
             {
+                hasData = true;
+
                 var plugin = new ServerDensityPlugin(featureStat.Name);
                 foreach (var reading in featureStat.Readings)
                 {
@@ -41,8 +43,13 @@ namespace Aqueduct.Monitoring.ServerDensity
                 payload.AddPlugin(plugin);
             }
 
-            Logger.LogDebugMessage(String.Format("Uploading {0} stats to ServerDensity", stats.Count));
-            _api.Metrics.UploadPluginData(_deviceId, payload);
+            if (hasData)
+            {
+                Logger.LogDebugMessage(String.Format("Uploading {0} stats to ServerDensity", stats.Count));
+                _api.Metrics.UploadPluginData(_deviceId, payload);
+            }
+            else
+                Logger.LogDebugMessage("No need to call server density");
         }
     }
 }
