@@ -24,7 +24,6 @@ namespace Aqueduct.Monitoring.MVC
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
             SensorBase.SetThreadScopedFeatureName(_featureName, _groupName);
-            new CountSensor(GetReadingName(filterContext.Controller, filterContext.ActionDescriptor.ActionName)).Increment();
             _watch.Reset();
             _watch.Start();
 
