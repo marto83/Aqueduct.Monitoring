@@ -81,7 +81,7 @@ namespace Aqueduct.Monitoring.Tests
 
             sensor.Add(new Int32ReadingData(1));
 
-            Assert.That(ReadingPublisher.Readings.First().FeatureGroup, Is.EqualTo("Global"));
+            Assert.That(ReadingPublisher.Readings.First().FeatureGroup, Is.EqualTo(FeatureStatistics.GlobalGroupName));
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace Aqueduct.Monitoring.Tests
 
             var sensor = new SensorTestDouble("test");
 
-            Assert.That(sensor.GetFeatureNameExposed().Group, Is.EqualTo("Global"));
+            Assert.That(sensor.GetFeatureNameExposed().Group, Is.EqualTo(FeatureStatistics.GlobalGroupName));
         }
 
         [Test]

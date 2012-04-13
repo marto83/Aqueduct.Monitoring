@@ -8,10 +8,11 @@ namespace Aqueduct.Monitoring.MVC
 {
     public class MVCNotificationProcessor
     {
-        public static void Initialise(GlobalFilterCollection filters)
+        public static void Initialise(GlobalFilterCollection filters, string featureName = null, string groupName = null)
         {
-            filters.Add(new NotificationFilter());
-           ReadingPublisher.Start((int)TimeSpan.FromMinutes(1).TotalMilliseconds);
+            filters.Add(new NotificationFilter(featureName, groupName));
+
+            ReadingPublisher.Start((int)TimeSpan.FromMinutes(1).TotalMilliseconds);
         }
 
         public static void HandleError(Exception lastError)

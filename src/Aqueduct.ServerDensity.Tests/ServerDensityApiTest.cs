@@ -106,5 +106,29 @@ namespace Aqueduct.ServerDensity.Tests
             api.Metrics.UploadPluginData(deviceId, null);
             RequestClientMock.Verify(x => x.Post(expectedUrl, It.IsAny<string>()));
         }
+
+        [Test]
+        public void Postback_WithPayload_ShouldPostPayload()
+        {
+            var api = GetApi();
+            string payloadData = "specificdata";
+            var payload = GetPayLoad(payloadData);
+
+            api.Metrics.UploadPluginData("blahblah", payload);
+            RequestClientMock.Verify(x => x.Post(It.IsAny<string>(), It.Is<string>(y => y.Contains(payloadData))));
+        }
+
+        private MetricsPayload GetPayLoad(string payloadData)
+        {
+            ServerDensityPlugin pluginData = new ServerDensityPlugin("Test");
+            pluginData["test"] = payloadData;
+            return new MetricsPayload
+            {
+                AgentKey = "77a63a6e708acb1e7d88f86257b75783",
+                Plugins = new Dictionary<string, ServerDensityPlugin>  { 
+                { "test", pluginData }
+            }
+            };
+        }
     }
 }

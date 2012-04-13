@@ -6,7 +6,9 @@ namespace Aqueduct.Monitoring
 {
 	public class FeatureStatistics
 	{
-		public FeatureStatistics()
+        public const string GlobalGroupName = "Global";
+
+        public FeatureStatistics()
 		{
 			Timestamp = DateTimeOffset.Now;
 			Readings = new List<ReadingData>();

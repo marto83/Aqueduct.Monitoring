@@ -35,7 +35,7 @@ namespace Aqueduct.Monitoring.Sensors
             var descriptor = new FeatureDescriptor();
             FeatureDescriptor savedDescriptor = Thread.GetData(Thread.GetNamedDataSlot(FeatureNameSlotName)) as FeatureDescriptor ?? new FeatureDescriptor();
             descriptor.Name = FeatureName ?? savedDescriptor.Name ?? "Application";
-            descriptor.Group = FeatureGroup ?? savedDescriptor.Group ?? "Global";
+            descriptor.Group = FeatureGroup ?? savedDescriptor.Group ?? FeatureStatistics.GlobalGroupName;
             return descriptor;
         }
 

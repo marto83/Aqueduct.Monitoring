@@ -22,11 +22,13 @@ namespace Aqueduct.ServerDensity.IntegrationTests
 
         private MetricsPayload GetPayLoad()
         {
+            ServerDensityPlugin pluginData = new ServerDensityPlugin("Test");
+            pluginData["test"] = 1;
             return new MetricsPayload
             {
                 AgentKey = "77a63a6e708acb1e7d88f86257b75783",
                 Plugins = new Dictionary<string, ServerDensityPlugin>  { 
-                { "test", new ServerDensityPlugin("Test") }
+                { "test", pluginData }
             }
             };
         }

@@ -10,7 +10,7 @@ namespace Aqueduct.Monitoring.ServerDensity
     {
         readonly static ILogger Logger = AppLogger.GetNamedLogger(typeof(ServerDensitySubscriber));
         private readonly string _AgentKey;
-        private const string ServerDensityFeatureGroup = "serverdensity";
+        public const string ServerDensityFeatureGroup = "serverdensity";
         private IServerDensityApi _api;
         private readonly string _deviceId;
         
