@@ -92,7 +92,7 @@ namespace Aqueduct.Monitoring
         private static string GetReadingInfo(Reading reading)
         {
             if (reading != null)
-                return String.Format("FeatureName: {0}, group: {1}, reading; {2}", reading.FeatureName, reading.FeatureGroup, reading.Data.Name);
+                return String.Format("FeatureName: {0}, group: {1}, reading; {2}, value: {3}", reading.FeatureName, reading.FeatureGroup, reading.Data.Name, reading.Data.GetValue());
             return "Null reading";
         }
 
