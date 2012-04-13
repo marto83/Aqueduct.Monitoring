@@ -11,7 +11,7 @@
     <summary />
     <dependencies>
       <dependency id="Aqueduct" version="1.0.0.0" />
-      <dependency id="Newtonsoft.Json" version="4.5.0.0" />
+      <dependency id="Newtonsoft.Json" version="[4.0.8.0]" />
     </dependencies>
   </metadata>
   <files>
