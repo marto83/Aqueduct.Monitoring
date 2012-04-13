@@ -11,7 +11,6 @@ namespace Aqueduct.Monitoring.MVC
         public static void Initialise(GlobalFilterCollection filters, string featureName = null, string groupName = null)
         {
             filters.Add(new NotificationFilter(featureName, groupName));
-
             ReadingPublisher.Start((int)TimeSpan.FromMinutes(1).TotalMilliseconds);
         }
 

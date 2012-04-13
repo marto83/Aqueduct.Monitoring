@@ -145,7 +145,7 @@
       <Project>{4307C470-DAB5-45E9-9DE1-536F213783C7}</Project>
       <Name>Aqueduct.Monitoring.MVC</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Aqueduct.Monitoring.Subscribers\Aqueduct.Monitoring.ServerDensity.csproj">
+    <ProjectReference Include="..\Aqueduct.Monitoring.ServerDensity\Aqueduct.Monitoring.ServerDensity.csproj">
       <Project>{D3DF3666-43CE-4A5F-9D8F-4215A080CFB8}</Project>
       <Name>Aqueduct.Monitoring.ServerDensity</Name>
     </ProjectReference>

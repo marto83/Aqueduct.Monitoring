@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.SampleM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.MVC", "src\Aqueduct.Monitoring.MVC\Aqueduct.Monitoring.MVC.csproj", "{4307C470-DAB5-45E9-9DE1-536F213783C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.ServerDensity", "src\Aqueduct.Monitoring.Subscribers\Aqueduct.Monitoring.ServerDensity.csproj", "{D3DF3666-43CE-4A5F-9D8F-4215A080CFB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.Monitoring.ServerDensity", "src\Aqueduct.Monitoring.ServerDensity\Aqueduct.Monitoring.ServerDensity.csproj", "{D3DF3666-43CE-4A5F-9D8F-4215A080CFB8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqueduct.ServerDensity", "src\Aqueduct.ServerDensity\Aqueduct.ServerDensity.csproj", "{8D620CCB-B482-4D1F-A97F-D71C4935161F}"
 EndProject
@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{1B4A32
 	ProjectSection(SolutionItems) = preProject
 		Aqueduct.Monitoring.build = Aqueduct.Monitoring.build
 		build.bat = build.bat
-		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
+		src\CommonAssemblyInfo.cs = src\CommonAssemblyInfo.cs
 		README.md = README.md
 	EndProjectSection
 EndProject

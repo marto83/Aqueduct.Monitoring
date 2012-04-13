@@ -38,7 +38,7 @@ namespace Aqueduct.Monitoring.SampleMVCSite
         {
             AreaRegistration.RegisterAllAreas();
             
-            MVCNotificationProcessor.Initialise(GlobalFilters.Filters);
+            MVCNotificationProcessor.Initialise(GlobalFilters.Filters, null, ServerDensity.ServerDensitySubscriber.ServerDensityFeatureGroup);
             LoggingSubscriber.Subscribe();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
@@ -47,7 +47,14 @@ namespace Aqueduct.Monitoring.SampleMVCSite
             {
                 initActionList.Add(new DefaultConfigInitialiser());
                 initActionList.AddOnFirstRequestAction(InitialiseLog4Net);
+                initActionList.AddOnFirstRequestAction(InitialiseSubscribers);
             });
+        }
+
+        private static void InitialiseSubscribers(HttpApplication application)
+        {
+            var subscriber = new ServerDensity.ServerDensitySubscriber("", "");
+            subscriber.Subscribe();
         }
 
         private static void InitialiseLog4Net(HttpApplication application)
