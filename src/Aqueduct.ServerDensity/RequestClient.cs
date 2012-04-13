@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using Aqueduct.Diagnostics;
 
 namespace Aqueduct.ServerDensity
 {
     public class RequestClient : IRequestClient
     {
+        readonly static ILogger Logger = AppLogger.GetNamedLogger(typeof(ServerDensityApi));
 
         private readonly string _username;
         private readonly string _password;
@@ -34,6 +36,8 @@ namespace Aqueduct.ServerDensity
 
         public string Get(string url)
         {
+            Logger.LogDebugMessage("Sending Request to url: " + url);
+
             using (WebClient client = Create())
             {
                 return client.DownloadString(url);
@@ -42,6 +46,7 @@ namespace Aqueduct.ServerDensity
 
         public string Post(string url, string postBody)
         {
+            Logger.LogDebugMessage("Sending Request to url: " + url);
             using (WebClient client = Create())
             {
                 client.Headers["Content-type"] = "application/x-www-form-urlencoded";

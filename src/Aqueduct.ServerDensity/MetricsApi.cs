@@ -14,9 +14,7 @@ namespace Aqueduct.ServerDensity
 
         private const string ModuleName = "metrics";
         private readonly ServerDensityApi _ApiBase;
-        /// <summary>
-        /// Initializes a new instance of the MetricsApi class.
-        /// </summary>
+        
         public MetricsApi(ServerDensityApi apiBase)
         {
             _ApiBase = apiBase;
@@ -29,8 +27,10 @@ namespace Aqueduct.ServerDensity
             NameValueCollection postData = new NameValueCollection();
             postData["payload"] = JsonConvert.SerializeObject(payload);
 
-            return _ApiBase.PostTo(ModuleName, "postback", null, postData);
+            var extraParams = new NameValueCollection();
+            extraParams["deviceId"] = deviceId;
+
+            return _ApiBase.PostTo(ModuleName, "postback", extraParams, postData);
         }
     }
-
 }
