@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Collections.Specialized;
+using Aqueduct.Diagnostics;
 
 namespace Aqueduct.ServerDensity
 {
     public class ServerDensityApi : IServerDensityApi
     {
+        readonly static ILogger Logger = AppLogger.GetNamedLogger(typeof(ServerDensityApi));
+
         private const string UrlTemplate = "https://{0}/{1}/{2}/{3}?account={4}&apiKey={5}{6}";
         private string _apiKey;
         private NetworkCredential _credentials;
@@ -43,11 +46,13 @@ namespace Aqueduct.ServerDensity
 
         internal string CallUrl(string module, string method)
         {
+            Logger.LogDebugMessage(String.Format("Calling url for module: {0} and method: {1}", module, method));
             return RequestClient.Get(string.Format(UrlTemplate, _apiUrl, _version, module, method, _account, _apiKey, ""));
         }
 
         public string PostTo(string module, string method, NameValueCollection extraQueryParams, NameValueCollection postData)
         {
+            Logger.LogDebugMessage(String.Format("Posting to module: {0} and method: {1}, with params: [{2}] and postData: [{3}]", module, method, extraQueryParams.ToQueryString(), postData.ToQueryString()));
             return RequestClient.Post(string.Format(UrlTemplate, _apiUrl, _version, module, method, _account, _apiKey, extraQueryParams.ToQueryString()), postData.ToQueryString());
         }
 
