@@ -126,6 +126,20 @@ namespace Aqueduct.Monitoring.Tests
 
             Assert.That(sensor.GetFeatureNameExposed().Group, Is.EqualTo(testGroup));
         }
+
+        [Test]
+        public void SetThreadScopeFeatureName_WithFeatureGroupSpecified_AddReadingWithCorrectGroupName()
+        {
+            string testGroup = "testGroup";
+            SensorBase.SetThreadScopedFeatureName("test", testGroup);
+
+            var sensor = new SensorTestDouble("test");
+            sensor.Add(new Int32ReadingData(1));
+            Reading reading = null;
+            ReadingPublisher.Readings.TryDequeue(out reading);
+
+            Assert.That(reading.FeatureGroup, Is.EqualTo(testGroup));
+        }
     
         
     }
