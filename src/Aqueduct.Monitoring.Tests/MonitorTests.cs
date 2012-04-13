@@ -175,6 +175,49 @@ namespace Aqueduct.Monitoring.Tests
             Assert.That(passedDataPoints.First().Timestamp - DateTime.Now, Is.LessThan(TimeSpan.FromSeconds(1)) );
         }
 
+        [Test]
+        public void Process_WithAReading_CreatedFeatureWithCorrectGroup()
+        {
+            IList<FeatureStatistics> featurestats = null;
+            ReadingPublisher.Subscribe(GetSubscriber((stats) =>
+            {
+                featurestats = stats;
+            }));
+
+            string group = "Group";
+            ReadingPublisher.PublishReading(new Reading { FeatureName = "DataPointName", FeatureGroup = group, Data = new Int32ReadingData(1) { Name = "Number" } });
+
+            ReadingPublisher.Start(100, false);
+            ReadingPublisher.Process();
+
+            Assert.That(featurestats.First().Group, Is.EqualTo(group));
+        }
+
+        [Test]
+        public void Process_WithTwoReadingsWithSameNameButDifferentGroups_CreatesTwoFeatureStatsWithSameNamesButDifferentGroups()
+        {
+            IList<FeatureStatistics> featureStats = null;
+            ReadingPublisher.Subscribe(GetSubscriber((dataPoints) =>
+            {
+                featureStats = dataPoints;
+            }));
+            string group1 = "Group1";
+            string group2 = "Group2";
+            string featureName = "featureName";
+            ReadingPublisher.PublishReading(new Reading { FeatureName = featureName, FeatureGroup = group1, Data = new Int32ReadingData(1) { Name = "Number" } });
+            ReadingPublisher.PublishReading(new Reading { FeatureName = featureName, FeatureGroup = group2, Data = new Int32ReadingData(1) { Name = "Error" } });
+
+            ReadingPublisher.Start(100, false);
+            ReadingPublisher.Process();
+
+            Assert.That(featureStats.Count, Is.EqualTo(2));
+            
+            Assert.That(featureStats.First().Name, Is.EqualTo(featureStats.Last().Name));
+            Assert.That(featureStats.First().Group, Is.EqualTo(group1));
+            Assert.That(featureStats.Last().Group, Is.EqualTo(group2));
+            
+        }
+
         private ReadingSubscriber GetSubscriber(Action<IList<FeatureStatistics>> action)
         {
             return new ReadingSubscriber(String.Empty, action);

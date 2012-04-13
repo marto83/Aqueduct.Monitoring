@@ -130,10 +130,10 @@ namespace Aqueduct.Monitoring
 
 		static void ProcessReading(ICollection<FeatureStatistics> dataPoints, Reading reading)
 		{
-			var dataPoint = dataPoints.FirstOrDefault(data => data.Name == reading.FeatureName);
+			var dataPoint = dataPoints.FirstOrDefault(data => data.Name == reading.FeatureName && data.Group == reading.FeatureGroup);
 			if (dataPoint == null)
 			{
-				dataPoint = new FeatureStatistics { Name = reading.FeatureName };
+				dataPoint = new FeatureStatistics { Name = reading.FeatureName, Group = reading.FeatureGroup };
 				dataPoint.Readings.Add(reading.Data);
 				dataPoints.Add(dataPoint);
 			}
