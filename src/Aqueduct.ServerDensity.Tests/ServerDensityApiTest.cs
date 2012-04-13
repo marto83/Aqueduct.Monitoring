@@ -94,5 +94,17 @@ namespace Aqueduct.ServerDensity.Tests
             api.Metrics.UploadPluginData("", null);
             RequestClientMock.Verify(x => x.Post(expectedUrl, It.IsAny<string>()));
         }
+
+        [Test]
+        public void Postback_WithDeviceId_AddsDeviceIdToQueryString()
+        {
+            var api = GetApi();
+            var deviceId = "blahblah";
+            var expectedUrl = GetExpectedUrl("metrics", "postback");
+            expectedUrl += "&deviceId=" + deviceId;
+
+            api.Metrics.UploadPluginData(deviceId, null);
+            RequestClientMock.Verify(x => x.Post(expectedUrl, It.IsAny<string>()));
+        }
     }
 }

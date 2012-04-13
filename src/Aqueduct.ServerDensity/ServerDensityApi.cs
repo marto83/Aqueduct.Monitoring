@@ -53,7 +53,8 @@ namespace Aqueduct.ServerDensity
         public string PostTo(string module, string method, NameValueCollection extraQueryParams, NameValueCollection postData)
         {
             Logger.LogDebugMessage(String.Format("Posting to module: {0} and method: {1}, with params: [{2}] and postData: [{3}]", module, method, extraQueryParams.ToQueryString(), postData.ToQueryString()));
-            return RequestClient.Post(string.Format(UrlTemplate, _apiUrl, _version, module, method, _account, _apiKey, extraQueryParams.ToQueryString()), postData.ToQueryString());
+            string extraQueryStringParams = extraQueryParams.Count > 0 ? "&" + extraQueryParams.ToQueryString() : "";
+            return RequestClient.Post(string.Format(UrlTemplate, _apiUrl, _version, module, method, _account, _apiKey, extraQueryStringParams), postData.ToQueryString());
         }
 
         public string Version { get { return _version; } }
