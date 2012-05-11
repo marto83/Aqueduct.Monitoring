@@ -1,5 +1,6 @@
 using System;
 using Aqueduct.Monitoring.Readings;
+using System.Web;
 
 namespace Aqueduct.Monitoring.Sensors
 {
@@ -11,8 +12,20 @@ namespace Aqueduct.Monitoring.Sensors
 
 		public void AddError(Exception ex)
 		{
-			AddReading(new Int32ReadingData(1) { Name = "TotalExceptions" });
-			AddReading(new Int32ReadingData(1) { Name = ex.GetType().Name });
+            if (ex is HttpException)
+            {
+                var httpEx = ex as HttpException;
+                if (httpEx.GetHttpCode() != 404)
+                    RecordException(httpEx.GetHttpCode() + httpEx.GetType().Name);
+            }
+            else
+			    RecordException(ex.GetType().Name);
 		}
-	}
+
+        private void RecordException(string name)
+        {
+            AddReading(new Int32ReadingData(1) { Name = "TotalExceptions" });
+            AddReading(new Int32ReadingData(1) { Name = name });
+        }
+    }
 }
