@@ -12,6 +12,15 @@ namespace Aqueduct.Monitoring.Aspects
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class MonitorExecutionTimeAttribute : MethodInterceptionAspect
     {
+        private readonly string _featureName;
+        private readonly string _featureGroup;
+        
+        public MonitorExecutionTimeAttribute(string featureName = null, string featureGroup = null)
+        {
+            _featureGroup = featureGroup;
+            _featureName = featureName;            
+        }
+
         // Record time spent executing the method
         public override void OnInvoke(MethodInterceptionArgs eventArgs)
         {
@@ -20,7 +29,8 @@ namespace Aqueduct.Monitoring.Aspects
                             eventArgs.Method.Name,
                             eventArgs.Method.IsGenericMethod,
                             eventArgs.Method.GetGenericArguments());
-            var sensor = new TimingSensor(metricName);
+
+            var sensor = new TimingSensor(metricName) { FeatureName = _featureName, FeatureGroup = _featureGroup };
             var stopwatch = new Stopwatch();
 
             stopwatch.Start();

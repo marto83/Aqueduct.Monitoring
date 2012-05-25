@@ -69,7 +69,7 @@ namespace Aqueduct.Monitoring.Tests
         {
             string featureName = "Feature1";
 
-            var sensor = new SensorTestDouble("readingName", featureName);
+            var sensor = new SensorTestDouble("readingName") { FeatureName = featureName };
 
             Assert.That(sensor.GetFeatureNameExposed().Name, Is.EqualTo(featureName));
         }
@@ -77,7 +77,7 @@ namespace Aqueduct.Monitoring.Tests
         [Test]
         public void GetFeatureGroup_WithoutOneSpecified_SetsGroupToGlobal()
         {
-            var sensor = new SensorTestDouble("test", "featureName");
+            var sensor = new SensorTestDouble("test") { FeatureName = "featureName" };
 
             sensor.Add(new Int32ReadingData(1));
 
@@ -88,7 +88,7 @@ namespace Aqueduct.Monitoring.Tests
         public void GetFeatureGroup_WithOneSet_SetsCorrectGroupToReading()
         {
             string group = "featureGroup";
-            var sensor = new SensorTestDouble("test", "featureName", group);
+            var sensor = new SensorTestDouble("test") { FeatureName = "featureName", FeatureGroup = group };
 
             sensor.Add(new Int32ReadingData(1));
 
@@ -111,7 +111,7 @@ namespace Aqueduct.Monitoring.Tests
             SensorBase.SetThreadScopedFeatureName("test", "threadScopedGroup");
 
             string sensorGroup = "SensorGroup";
-            var sensor = new SensorTestDouble("test", "Name", sensorGroup);
+            var sensor = new SensorTestDouble("test") { FeatureName = "Name", FeatureGroup = sensorGroup };
 
             Assert.That(sensor.GetFeatureNameExposed().Group, Is.EqualTo(sensorGroup));
         }

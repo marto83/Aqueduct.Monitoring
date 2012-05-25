@@ -7,8 +7,7 @@ namespace Aqueduct.Monitoring.Tests
 {
     public class SensorTestDouble : SensorBase
     {
-        public SensorTestDouble(string readingName, string featureName = null, string featureGroup = null)
-            : base(readingName, featureName, featureGroup)
+        public SensorTestDouble(string readingName) : base(readingName)
         {
 
         }

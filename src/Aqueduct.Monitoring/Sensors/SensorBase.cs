@@ -8,27 +8,14 @@ namespace Aqueduct.Monitoring.Sensors
 	{
 		const string FeatureNameSlotName = "FeatureName";
 
-		protected SensorBase(string readingName) : this(readingName, null)
+		protected SensorBase(string readingName)
 		{
-			
-		}
-
-        protected SensorBase(string readingName, string featureName)
-            : this(readingName, featureName, null)
-		{
-			
-		}
-
-        protected SensorBase(string readingName, string featureName, string featureGroup = null)
-        {
             ReadingName = readingName;
-            FeatureName = featureName;
-            FeatureGroup = featureGroup;
-        }
+		}
 
 		protected string ReadingName { get; private set; }
-		protected string FeatureName { get; private set; }
-        protected string FeatureGroup { get; private set; }
+		public string FeatureName { get; set; }
+        public string FeatureGroup { get; set; }
 
         internal FeatureDescriptor GetFeatureDescriptor()
         {

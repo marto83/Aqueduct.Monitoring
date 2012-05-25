@@ -10,6 +10,13 @@ namespace Aqueduct.Monitoring.Tests
     [TestFixture]
     public class MonitorTests : MonitorTestBase
     {
+
+        [SetUp]
+        public void Setup()
+        {
+            ReadingPublisher.Start(1000, false);
+        }
+
         [Test]
         public void Add_AddsReadingToMonitor()
         {
