@@ -14,7 +14,12 @@ namespace Aqueduct.Monitoring.Aspects
     {
         private readonly string _featureName;
         private readonly string _featureGroup;
-        
+
+        public MonitorExecutionTimeAttribute()
+        {
+
+        }
+
         public MonitorExecutionTimeAttribute(string featureName = null, string featureGroup = null)
         {
             _featureGroup = featureGroup;
