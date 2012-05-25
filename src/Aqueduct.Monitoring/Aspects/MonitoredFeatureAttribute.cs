@@ -9,15 +9,17 @@ namespace Aqueduct.Monitoring.Aspects
 {
     [Serializable]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-    internal sealed class MonitoredFeatureAttribute : OnMethodBoundaryAspect //not happy with it yet
+    public sealed class MonitoredFeatureAttribute : OnMethodBoundaryAspect //not happy with it yet
     {
         private readonly string _FeatureName;
         private readonly int _random;
-        internal MonitoredFeatureAttribute(SerializationInfo info, StreamingContext context)
+
+        public MonitoredFeatureAttribute(SerializationInfo info, StreamingContext context)
         {
+
         }
 
-        internal MonitoredFeatureAttribute(string featureName) 
+        public MonitoredFeatureAttribute(string featureName) 
         {
             _random = new Random().Next();
             _FeatureName = featureName;
