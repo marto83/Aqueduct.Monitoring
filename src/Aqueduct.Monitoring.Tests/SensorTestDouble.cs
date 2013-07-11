@@ -1,7 +1,5 @@
-using System.Linq;
 using Aqueduct.Monitoring.Readings;
 using Aqueduct.Monitoring.Sensors;
-using System;
 
 namespace Aqueduct.Monitoring.Tests
 {

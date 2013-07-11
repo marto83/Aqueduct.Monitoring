@@ -9,3 +9,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyProduct("Aqueduct.Monitoring")]
 [assembly: InternalsVisibleTo("Aqueduct.Monitoring.Tests")]
+[assembly: InternalsVisibleTo("Aqueduct.Monitoring.Aspects.Tests")]

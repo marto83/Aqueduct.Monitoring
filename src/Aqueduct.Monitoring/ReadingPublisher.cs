@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
 using Aqueduct.Monitoring.Readings;
-using Aqueduct.Diagnostics;
+using NLog;
 
 namespace Aqueduct.Monitoring
 {
 	public static class ReadingPublisher
 	{
 		static Timer _timer;
-		static readonly ILogger Logger = AppLogger.GetNamedLogger(typeof(ReadingPublisher));
+		static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 		static bool _initialised;
 		static readonly object InitialisationLock = new object();
 		static readonly object AddSubscriberLock = new object();
@@ -28,7 +28,7 @@ namespace Aqueduct.Monitoring
 
 		public static void Start(int processInterval, bool enableTimer = true)
 		{
-            Logger.LogDebugMessage("Starting publisher");
+            Logger.Debug("Starting publisher");
 			if (_initialised)
 				return;
 
@@ -36,7 +36,7 @@ namespace Aqueduct.Monitoring
 			{
 				if (_initialised)
 					return;
-                Logger.LogDebugMessage("Initialising timer");
+                Logger.Debug("Initialising timer");
 				_timer = new Timer();
 				_timer.Interval = processInterval;
 				_timer.Elapsed += Timer_Elapsed;
@@ -50,7 +50,7 @@ namespace Aqueduct.Monitoring
 
 		public static void Stop()
 		{
-            Logger.LogDebugMessage("Stopping timer and disposing of the timer");
+            Logger.Debug("Stopping timer and disposing of the timer");
 			if (_initialised == false)
 				return;
 
@@ -72,7 +72,7 @@ namespace Aqueduct.Monitoring
 
 		public static void Subscribe(ReadingSubscriber subscriber)
 		{
-            Logger.LogDebugMessage("Adding subscriber " + subscriber.Name);
+            Logger.Debug("Adding subscriber " + subscriber.Name);
 
 			lock (AddSubscriberLock)
 			{
@@ -82,7 +82,7 @@ namespace Aqueduct.Monitoring
 
 		public static void PublishReading(Reading reading)
 		{
-            Logger.LogDebugMessage("Enqueuing reding " + GetReadingInfo(reading));
+            Logger.Debug("Enqueuing reding " + GetReadingInfo(reading));
 			lock (PublishReadingLock)
 			{
 				Readings.Enqueue(reading);
@@ -98,7 +98,7 @@ namespace Aqueduct.Monitoring
 
         internal static void Reset()
 		{
-            Logger.LogDebugMessage("Resetting publisner: clearing queue and removing all subscribers");
+            Logger.Debug("Resetting publisner: clearing queue and removing all subscribers");
 			lock (PublishReadingLock)
 			{
 				Readings = new ConcurrentQueue<Reading>();
@@ -112,7 +112,7 @@ namespace Aqueduct.Monitoring
 
 		internal static void Process()
 		{
-            Logger.LogDebugMessage("Processing readings");
+            Logger.Debug("Processing readings");
 			var dataPoints = new List<FeatureStatistics>();
 			Reading reading;
 			while (Readings.TryDequeue(out reading))
@@ -149,7 +149,7 @@ namespace Aqueduct.Monitoring
 
 		static void NotifySubscribers(IList<FeatureStatistics> dataPoints)
 		{
-            Logger.LogDebugMessage("Notifying Subscribers");
+            Logger.Debug("Notifying Subscribers");
 			if (_initialised == false)
 				return;
 
@@ -162,12 +162,12 @@ namespace Aqueduct.Monitoring
 				{
 					try
 					{
-                        Logger.LogDebugMessage("Notifying subsriber: " + subscriber.Name);
+                        Logger.Debug("Notifying subsriber: " + subscriber.Name);
 						subscriber.ProcessStatistics(dataPoints);
 					}
 					catch (Exception ex)
 					{
-						Logger.LogError(String.Format("Error while executing subscriber: {0}", subscriber.Name), ex);
+						Logger.ErrorException(String.Format("Error while executing subscriber: {0}", subscriber.Name), ex);
 					}
 				}
 			}

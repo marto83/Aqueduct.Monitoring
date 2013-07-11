@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Aqueduct.Monitoring.Tests;
 using NUnit.Framework;
-using Aqueduct.Monitoring.Sensors;
 using Aqueduct.Monitoring.Aspects;
 
-namespace Aqueduct.Monitoring.Tests.Aspects
+namespace Aqueduct.Monitoring.Aspects.Tests
 {
     [MonitoredFeature("TestFeature")]
     public class AspectTestClass
